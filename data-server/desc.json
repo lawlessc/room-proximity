@@ -1,0 +1,34 @@
+{
+    "rooms": [
+        {
+            "name": "solas",
+            "location": "1st floor",
+            "capacity": "10",
+            "phone": "123456789",
+            "owner": "CATE",
+            "conferencing": true,
+            "uri":"/rooms/solas",
+            "beacon":"/beacons/beacon1"
+        },
+        {
+            "name": "scotia",
+            "location": "2st floor",
+            "capacity": "7",
+            "phone": "123456789",
+            "owner": "CTO",
+            "conferencing": true,
+            "uri":"/rooms/scotia",
+            "beacon":"/beacons/beacon2"
+        },
+        {
+            "name": "nova",
+            "location": "Ground floor",
+            "capacity": "20",
+            "phone": "123456789",
+            "owner": "ATIS",
+            "conferencing": true,
+            "uri":"/rooms/nova",
+            "beacon":"/beacons/beacon3"            
+        }
+    ]
+}

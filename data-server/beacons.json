@@ -1,0 +1,36 @@
+{
+    "beacons": [
+        {
+            "uuid": 1,
+            "major": "666",
+            "minor": "49567",
+            "colour": "blue",
+            "room": "solas",
+            "uri": "/rooms/solas"
+        },
+        {
+            "uuid": 2,
+            "major": "55149",
+            "minor": "5016",
+            "colour": "green",
+            "room": "nova",
+            "uri": "/rooms/nova"
+        },
+        {
+            "uuid": 3,
+            "major": "24723",
+            "minor": "63838",
+            "colour": "navy",
+            "room": "scotia",
+            "uri": "/rooms/scotia"
+        },
+        {
+            "uuid": 4,
+            "major": "123",
+            "minor": "456",
+            "colour": "navy",
+            "room": "scotia",
+            "uri": "/rooms/nova"
+        }
+    ]
+}

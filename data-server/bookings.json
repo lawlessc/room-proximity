@@ -1,0 +1,83 @@
+{
+    "rooms": [
+        {
+            "roomname": "solas",
+            "bookings": [
+                {
+                    "URI": "--",
+                    "date": "--",
+                    "StartT": "2147",
+                    "EndT": "2200",
+                    "MeetingName": "Avengers",
+                    "Users": "David Bowman"
+                },
+                {
+                    "URI": "--",
+                    "date": "--",
+                    "StartT": "2147",
+                    "EndT": "2200",
+                    "MeetingName": "Avengers",
+                    "Users": "Hank Hill"
+                },
+                {
+                    "URI": "1",
+                    "date": "1",
+                    "StartT": "1",
+                    "EndT": "1",
+                    "MeetingName": "1",
+                    "Users": "1"
+                }
+            ]
+        },
+        {
+            "roomname": "nova",
+            "bookings": [
+                {
+                    "URI": "--",
+                    "date": "--",
+                    "StartT": "2147",
+                    "EndT": "2200",
+                    "MeetingName": "Avengers",
+                    "Users": "Hank Hill"
+                },
+                {
+                    "URI": "--",
+                    "date": "--",
+                    "StartT": "2147",
+                    "EndT": "2200",
+                    "MeetingName": "Lunch Meeting",
+                    "Users": "Bobby Hill"
+                },
+                {
+                    "URI": "--",
+                    "date": "--",
+                    "StartT": "2147",
+                    "EndT": "2200",
+                    "MeetingName": "Avengers",
+                    "Users": "Hank Hill"
+                }
+            ]
+        },
+        {
+            "roomname": "scotia",
+            "bookings": [
+                {
+                    "URI": "--",
+                    "date": "--",
+                    "StartT": "2147",
+                    "EndT": "2200",
+                    "MeetingName": "Avengers",
+                    "Users": "Hank Hill"
+                },
+                {
+                    "URI": "--",
+                    "date": "--",
+                    "StartT": "2147",
+                    "EndT": "2200",
+                    "MeetingName": "Avengers",
+                    "Users": "Hank Hill"
+                }
+            ]
+        }
+    ]
+}
