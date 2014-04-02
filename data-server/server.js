@@ -6,7 +6,6 @@ var app = express();
 var url = require('url');
 var util = require ('util');
 
-
 // simple logger
 app.use(function(req, res, next){
   console.log('%s %s', req.method, req.url);
@@ -192,33 +191,6 @@ app.get('/rooms/:room', function(req,res){
     
 });
 
-// //used for storing room information before db is set up
-// app.get('/rooms/solas', function(req,res){
-  // var myroom = url.parse(req.url).pathname.split('/')[2];
-  // var bookings = getBooking(myroom);
-  // var roomDetails = getRoomDetails(myroom);
-  // res.send(roomDetails + bookings);
-    
-// });
-
-// //used for storing room information before db is set up
-// app.get('/rooms/nova', function(req,res){
-  // var myroom = url.parse(req.url).pathname.split('/')[2]
-  // var bookings = getBooking(myroom);
-  // var roomDetails = getRoomDetails(myroom);
-  // res.send(roomDetails + bookings);
-    
-// });
-
-// //used for storing room information before db is set up
-// app.get('/rooms/scotia', function(req,res){
-  // var myroom =url.parse(req.url).pathname.split('/')[2]
-  // var booking = getBooking(myroom);
-  // var roomDetails = getRoomDetails(myroom);
-  // res.send(roomDetails + booking);
-    
-// });
-
 //Parses .json file
 function readJsonFileSync(filepath, encoding){
   if (typeof (encoding) == 'undefined'){
@@ -232,17 +204,6 @@ function getJson(file){
   var filepath = __dirname + '/' + file;
   return readJsonFileSync(filepath);
 }
-
-// //returns schedule from schd.json
-// function getSchedule(room){
-    // var jSchedule = getJson('schd.json');
-    // for (var i = 0; i<jSchedule['schedule'].length;i++){
-      // if (room == jSchedule['schedule'][i].room){
-        // var strSchedule = JSON.stringify(jSchedule['schedule'][i]);
-      // }
-  // }
-  // return strSchedule;
-// }
 
 //returns schedule from desc.json
 function getRoomDetails(room){
