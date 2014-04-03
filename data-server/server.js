@@ -119,9 +119,8 @@ app.get('/beacon/new', function(req, res){
 //retrieves all beacons
 app.get('/beacon', function(req, res) {
   var beacons = getJson('beacons.json');
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.write(JSON.stringify(beacons));
-  res.end();
+  var jBeacons = beacons['beacons'];
+  res.json({beacon: jBeacons});
 });
 
 app.post('/rooms/:room/booking', function(req, res) {
@@ -136,6 +135,7 @@ app.post('/rooms/:room/booking', function(req, res) {
   var meetingName = req.body.meetingName;
   var users = req.body.users;
 
+  var jBookings = getJson('bookings.json');
   var jBookings = getJson('bookings.json');
   
   for (var i = 0; i< jBookings['rooms'].length; i++) {
@@ -187,7 +187,7 @@ app.get('/rooms/:room', function(req,res){
   var myroom = req.params.room;
   var bookings = getBooking(myroom);
   var roomDetails = getRoomDetails(myroom);
-  res.send(roomDetails + bookings);
+  res.json({roomDetails : roomDetails, bookings:bookings});
     
 });
 
@@ -210,7 +210,7 @@ function getRoomDetails(room){
   var jRoom = getJson('desc.json');
   for (var i = 0; i< jRoom['rooms'].length; i++) {
       if (room == jRoom['rooms'][i].name){
-        var strRoom = JSON.stringify(jRoom['rooms'][i]);
+        var strRoom = jRoom['rooms'][i];
       }
   } 
   return strRoom;
@@ -220,7 +220,7 @@ function getBooking(room){
   var jBookings = getJson('bookings.json');
   for (var i = 0; i< jBookings['rooms'].length; i++) {
       if (room == jBookings['rooms'][i].roomname){
-        var strBookings = JSON.stringify(jBookings['rooms'][i]);
+        var strBookings = jBookings['rooms'][i];
       }
   } 
   return strBookings;

@@ -6,26 +6,18 @@
                 {
                     "URI": "--",
                     "date": "--",
-                    "StartT": "2147",
-                    "EndT": "2200",
-                    "MeetingName": "Avengers",
+                    "StartT": "0900",
+                    "EndT": "1000",
+                    "MeetingName": "CTO Planning",
                     "Users": "David Bowman"
                 },
                 {
                     "URI": "--",
                     "date": "--",
-                    "StartT": "2147",
-                    "EndT": "2200",
-                    "MeetingName": "Avengers",
+                    "StartT": "1100",
+                    "EndT": "1200",
+                    "MeetingName": "CATE Update",
                     "Users": "Hank Hill"
-                },
-                {
-                    "URI": "1",
-                    "date": "1",
-                    "StartT": "1",
-                    "EndT": "1",
-                    "MeetingName": "1",
-                    "Users": "1"
                 }
             ]
         },
@@ -35,25 +27,25 @@
                 {
                     "URI": "--",
                     "date": "--",
-                    "StartT": "2147",
-                    "EndT": "2200",
-                    "MeetingName": "Avengers",
+                    "StartT": "0930",
+                    "EndT": "1030",
+                    "MeetingName": "ATIS Planning",
                     "Users": "Hank Hill"
                 },
                 {
                     "URI": "--",
                     "date": "--",
-                    "StartT": "2147",
-                    "EndT": "2200",
+                    "StartT": "1200",
+                    "EndT": "1300",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Bobby Hill"
                 },
                 {
                     "URI": "--",
                     "date": "--",
-                    "StartT": "2147",
-                    "EndT": "2200",
-                    "MeetingName": "Avengers",
+                    "StartT": "1500",
+                    "EndT": "1600",
+                    "MeetingName": "Team Meeting",
                     "Users": "Hank Hill"
                 }
             ]
@@ -64,17 +56,17 @@
                 {
                     "URI": "--",
                     "date": "--",
-                    "StartT": "2147",
-                    "EndT": "2200",
-                    "MeetingName": "Avengers",
+                    "StartT": "1500",
+                    "EndT": "1600",
+                    "MeetingName": "Team Meeting",
                     "Users": "Hank Hill"
                 },
                 {
                     "URI": "--",
                     "date": "--",
-                    "StartT": "2147",
-                    "EndT": "2200",
-                    "MeetingName": "Avengers",
+                    "StartT": "1200",
+                    "EndT": "1300",
+                    "MeetingName": "Lunch Meeting",
                     "Users": "Hank Hill"
                 }
             ]
