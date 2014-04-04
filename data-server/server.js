@@ -187,7 +187,7 @@ app.get('/rooms/:room', function(req,res){
   var myroom = req.params.room;
   var bookings = getBooking(myroom);
   var roomDetails = getRoomDetails(myroom);
-  res.json({roomDetails : roomDetails, bookings:bookings});
+  res.json({roomDetails : roomDetails, bookingsDetails:bookings});
     
 });
 
