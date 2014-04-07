@@ -35,9 +35,9 @@
         android:name="com.estimote.examples.demos.ListBeaconsActivity"
         android:label="Select Beacon"
         android:screenOrientation="portrait" />
-   <!--  <activity
+    <!-- <activity
         android:name="com.estimote.examples.demos.ListBeaconsActivity"
-        android:label="Select Beacon"
+        android:label="iBeacons"
         android:screenOrientation="portrait">
           <intent-filter>
         <action android:name="android.intent.action.MAIN"/>

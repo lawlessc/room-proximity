@@ -18,9 +18,11 @@ import org.apache.http.message.BasicNameValuePair;
 //import com.estimote.examples.demos.BookingActivity.HttpAsyncTask;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +43,8 @@ public class PostBookingActivity extends Activity{
 		Button book = (Button) findViewById(R.id.btnSave);
 		book.setOnClickListener(new OnClickListener() {
 
+		
+			
 			@Override
 			public void onClick(View v) {
 				AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
@@ -49,6 +53,15 @@ public class PostBookingActivity extends Activity{
 		});
 		}
 
+	public void showTimePickerDialog(View v) {
+	    DialogFragment newFragment = new TimePickerFragment();
+	    newFragment.show(getFragmentManager(), "timePicker");
+	}
+	
+	public void showDatePickerDialog(View v) {
+	    DialogFragment newFragment = new DatePickerFragment();
+	    newFragment.show(getFragmentManager(), "datePicker");
+	}
 
 	class AsyncHttpPost extends AsyncTask<String, String, String>{
 
@@ -68,6 +81,7 @@ public class PostBookingActivity extends Activity{
 				EditText startT = (EditText) currentView.findViewWithTag("edtStartT");
 				EditText endT = (EditText) currentView.findViewWithTag("edtEndT");
 				EditText users = (EditText) currentView.findViewWithTag("edtUsers");
+				
 				Log.e("POST", date.getText().toString());
 				Log.e("POST", startT.getText().toString());
 				Log.e("POST", endT.getText().toString());
@@ -81,7 +95,7 @@ public class PostBookingActivity extends Activity{
 				nameValuePairs.add(new BasicNameValuePair("startTime", startT.getText().toString()));
 				nameValuePairs.add(new BasicNameValuePair("endTime", endT.getText().toString()));
 				nameValuePairs.add(new BasicNameValuePair("meetingName",meetingName.getText().toString()));
-				nameValuePairs.add(new BasicNameValuePair("users", users.getText().toString()));
+				nameValuePairs.add(new BasicNameValuePair("users", "testUser"));
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 				HttpResponse response = httpClient.execute(httppost);
 				

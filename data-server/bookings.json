@@ -4,16 +4,16 @@
             "roomname": "solas",
             "bookingArray": [
                 {
-                    "URI": "--",
-                    "date": "--",
+                    "URI": "solas/booking1",
+                    "date": "7/4/14",
                     "StartT": "0900",
                     "EndT": "1000",
                     "MeetingName": "CTO Planning",
                     "Users": "David Bowman"
                 },
                 {
-                    "URI": "--",
-                    "date": "--",
+                    "URI": "solas/booking2",
+                    "date": "7/4/14",
                     "StartT": "1100",
                     "EndT": "1200",
                     "MeetingName": "CATE Update",
@@ -25,24 +25,24 @@
             "roomname": "nova",
             "bookingArray": [
                 {
-                    "URI": "--",
-                    "date": "--",
+                    "URI": "nova/booking1",
+                    "date": "7/4/14",
                     "StartT": "0930",
                     "EndT": "1030",
                     "MeetingName": "ATIS Planning",
                     "Users": "Hank Hill"
                 },
                 {
-                    "URI": "--",
-                    "date": "--",
+                    "URI": "nova/booking2",
+                    "date": "7/4/14",
                     "StartT": "1200",
                     "EndT": "1300",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Bobby Hill"
                 },
                 {
-                    "URI": "--",
-                    "date": "--",
+                    "URI": "nova/booking3",
+                    "date": "7/4/14",
                     "StartT": "1500",
                     "EndT": "1600",
                     "MeetingName": "Team Meeting",
@@ -54,16 +54,16 @@
             "roomname": "scotia",
             "bookingArray": [
                 {
-                    "URI": "--",
-                    "date": "--",
+                    "URI": "scotia/booking1",
+                    "date": "7/4/14",
                     "StartT": "1500",
                     "EndT": "1600",
                     "MeetingName": "Team Meeting",
                     "Users": "Hank Hill"
                 },
                 {
-                    "URI": "--",
-                    "date": "--",
+                    "URI": "scotia/booking2",
+                    "date": "7/4/14",
                     "StartT": "1200",
                     "EndT": "1300",
                     "MeetingName": "Lunch Meeting",

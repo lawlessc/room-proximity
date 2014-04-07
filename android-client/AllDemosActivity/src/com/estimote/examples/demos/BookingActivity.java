@@ -35,7 +35,6 @@ public class BookingActivity extends ListActivity {
 	//private Beacon beacon;
 	private int major;
 	private int minor;
-	private BookingAdapter adapter;
 	String room = null;
 	JSONObject jBookings = null;
 	JSONObject json = null;
@@ -66,8 +65,7 @@ public class BookingActivity extends ListActivity {
 
 			adapter=new ArrayAdapter<JSONObject>(this, android.R.layout.simple_list_item_1,listItems);
 			setListAdapter(adapter);
-
-			//				
+		
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,27 +77,8 @@ public class BookingActivity extends ListActivity {
 			e.printStackTrace();
 		}
 
-//			JSONObject room = new JSONObject(roomData);
-//			JSONArray bookings = new JSONArray(bookingData);
-//			bookings.length();
-//			Log.e("beacons",bookings.getJSONObject(0).opt("MeetingName").toString());
-			
-//			for(int i = 0; i<bookings.length();i++){
-//					
-//				String name = bookings.getJSONObject(i).opt("MeetingName").toString();
-
-//				bookingList.add(createData("planet",name));
-
-//			}
-			
-			//room.optString("location");
-			
-//			roomList.add(createData("planet",room.optString("name")));
-
-
 	}
-	
-	
+		
 	public void makeBooking(View view) throws JSONException{		
 		Intent i = new Intent(getApplicationContext(), PostBookingActivity.class);
 		Log.e("Context",getApplicationContext().toString());
@@ -110,7 +89,6 @@ public class BookingActivity extends ListActivity {
 		startActivity(i);
 
 	}
-
 
 	public class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		protected String doInBackground(String... urls) {
@@ -148,7 +126,6 @@ public class BookingActivity extends ListActivity {
 
 			// receive response as inputStream
 			inputStream = httpResponse.getEntity().getContent();
-			//Log.d("beacons", inputStream.toString());
 			result = convertInputStreamToString(inputStream);
 
 		} catch (Exception e) {
@@ -159,8 +136,6 @@ public class BookingActivity extends ListActivity {
 		return result;
 	}
 
-	 
-	
 	private static String convertInputStreamToString(InputStream inputStream) throws IOException{
 		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
 		String line = "";
@@ -170,7 +145,6 @@ public class BookingActivity extends ListActivity {
 
 		inputStream.close();
 		return result;
-
 	}
 
 }

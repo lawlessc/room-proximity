@@ -180,8 +180,8 @@ public class ListBeaconsActivity extends Activity {
           try {
             Class<?> clazz = Class.forName(getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY));
             
-            Intent intent = new Intent(ListBeaconsActivity.this, ListBeaconsActivity.class);
-            intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
+            Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
+            //intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
             
             //Intent intent = new Intent(ListBeaconsActivity.this, clazz);
             intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
