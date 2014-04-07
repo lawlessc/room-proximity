@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >   
+        
+        <TextView
+            android:id="@+id/txtMeetingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MeetingName"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+            
+            </TextView>
+            
+            <EditText
+            android:id="@+id/edtMeetingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:tag="edtMeetingName" >
+
+            <requestFocus />
+        </EditText>
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >   
+        
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+            
+            </TextView>
+
+        <EditText
+            android:id="@+id/edtDate"
+            android:tag="edtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="date" >
+
+        </EditText>
+        
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >   
+        
+        <TextView
+            android:id="@+id/txtStartT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Time"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+            
+            </TextView>
+
+        <EditText
+            android:id="@+id/edtStartT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10" 
+            android:inputType="time"
+            android:tag="edtStartT"/> 
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >   
+        
+        <TextView
+            android:id="@+id/txtEndT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Time"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+            
+            </TextView>
+
+        <EditText
+            android:id="@+id/edtEndT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="time"
+            android:tag="edtEndT" />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >   
+        
+        <TextView
+            android:id="@+id/txtUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+            
+            </TextView>
+
+        <EditText
+            android:id="@+id/edtUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10" 
+            android:tag="edtUsers"/>
+        
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnBook"
+        android:text="Save" />
+</LinearLayout>

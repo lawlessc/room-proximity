@@ -36,7 +36,6 @@ public class ListBeaconsActivity extends Activity {
 
   private static final int REQUEST_ENABLE_BT = 1234;
   private static final String ESTIMOTE_BEACON_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
-//  private static final String ESTIMOTE_BEACON_PROXIMITY_UUID = "1";
   private static final String ESTIMOTE_IOS_PROXIMITY_UUID = "8492E75F-4FD6-469D-B132-043FE94921D8";
   private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
@@ -180,7 +179,11 @@ public class ListBeaconsActivity extends Activity {
         if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
           try {
             Class<?> clazz = Class.forName(getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY));
-            Intent intent = new Intent(ListBeaconsActivity.this, clazz);
+            
+            Intent intent = new Intent(ListBeaconsActivity.this, ListBeaconsActivity.class);
+            intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
+            
+            //Intent intent = new Intent(ListBeaconsActivity.this, clazz);
             intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
             startActivity(intent);
           } catch (ClassNotFoundException e) {

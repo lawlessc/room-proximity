@@ -50,13 +50,5 @@ public class AllDemosActivity extends Activity {
           startActivity(intent);
         }
       });
-//    findViewById(R.id.triangulate_button).setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//          Intent intent = new Intent(AllDemosActivity.this, ListBeaconsActivity.class);
-//          intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
-//          startActivity(intent);
-//        }
-//      });
   }
 }

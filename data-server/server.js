@@ -125,18 +125,30 @@ app.get('/beacon', function(req, res) {
 
 app.post('/rooms/:room/booking', function(req, res) {
 
+  console.log("server hello");
+  
   //POST data
   var room = req.params.room;
+  console.log(room);
   // var room = 'solas';
   var uri = req.body.uri;
+  console.log(uri);
   var date = req.body.date;
+  console.log(date);
   var startTime = req.body.startTime;
+  console.log(startTime);
   var endTime = req.body.endTime;
+  console.log(endTime);    
   var meetingName = req.body.meetingName;
+  console.log(meetingName);
   var users = req.body.users;
+  console.log(users);
 
   var jBookings = getJson('bookings.json');
-  var jBookings = getJson('bookings.json');
+  
+  //console.log(jBookings.length);
+  console.log(jBookings['rooms'].length);
+  //console.log(jBookings['rooms'][1].bookingArray);
   
   for (var i = 0; i< jBookings['rooms'].length; i++) {
      if (room == jBookings['rooms'][i].roomname){
@@ -144,8 +156,8 @@ app.post('/rooms/:room/booking', function(req, res) {
       var newBooking = jBookings['rooms'][i];
       //creates and adds new object to the booking array
       var jObject = {"URI": uri, 'date':date, 'StartT':startTime, 'EndT': endTime, 'MeetingName':meetingName, 'Users':users};
-      var pos = newBooking['bookings'].length;
-      newBooking['bookings'][pos]= jObject;
+      var pos = newBooking['bookingArray'].length;
+      newBooking['bookingArray'][pos]= jObject;
       //converts the while booking to a string for saving
       var strBookings = JSON.stringify(jBookings, null, 4);
       }

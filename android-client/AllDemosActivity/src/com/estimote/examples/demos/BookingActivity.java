@@ -4,58 +4,115 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Toast;
+
 
 import com.estimote.sdk.Beacon;
 
-public class BookingActivity extends Activity {
+public class BookingActivity extends ListActivity {
 	
 	private static final String TAG = BookingActivity.class.getSimpleName();
 	//private Beacon beacon;
 	private int major;
 	private int minor;
+	private BookingAdapter adapter;
+	String room = null;
+	JSONObject jBookings = null;
+	JSONObject json = null;
 	
-	
-	
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.booking);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Beacon beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
-		
-//		major = (TextView) findViewById(R.id.majorBk);
-//		minor = (TextView) findViewById(R.id.minorBk);
-		
-//		major = beacon.getMajor();
-//		minor = beacon.getMinor();
 
-		//Connect(major, minor);
-		//JSONResponse(response);
-		
-		//new HttpAsyncTask().execute("http://github.com");
 		major = beacon.getMajor();
 		minor = beacon.getMinor();
-		
-		new HttpAsyncTask().execute("http://127.0.0.1:8080/" + major + "/" + minor);
-		Log.d("beacons","connected");
+
+		ArrayAdapter<JSONObject> adapter;
+		ArrayList<JSONObject> listItems = new ArrayList<JSONObject>();
+
+		try {
+			room = new HttpAsyncTask().execute("http://localhost:8080/" + major + "/" + minor).get();
+			json = new JSONObject(room);
+			jBookings = json.getJSONObject("bookingsDetails");
+			JSONArray bookingArray = jBookings.getJSONArray("bookingArray");
+			Log.e("JSON", bookingArray.toString());
+
+			for(int i = 0 ; i < bookingArray.length() ; i++ ){		
+				listItems.add(bookingArray.getJSONObject(i));
+			}
+
+			adapter=new ArrayAdapter<JSONObject>(this, android.R.layout.simple_list_item_1,listItems);
+			setListAdapter(adapter);
+
+			//				
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+//			JSONObject room = new JSONObject(roomData);
+//			JSONArray bookings = new JSONArray(bookingData);
+//			bookings.length();
+//			Log.e("beacons",bookings.getJSONObject(0).opt("MeetingName").toString());
+			
+//			for(int i = 0; i<bookings.length();i++){
+//					
+//				String name = bookings.getJSONObject(i).opt("MeetingName").toString();
+
+//				bookingList.add(createData("planet",name));
+
+//			}
+			
+			//room.optString("location");
+			
+//			roomList.add(createData("planet",room.optString("name")));
+
+
+	}
+	
+	
+	public void makeBooking(View view) throws JSONException{		
+		Intent i = new Intent(getApplicationContext(), PostBookingActivity.class);
+		Log.e("Context",getApplicationContext().toString());
+
+		String rName = jBookings.getString("roomname").toString();
+		Log.e("JSON", rName);
+		i.putExtra("roomname", rName );
+		startActivity(i);
+
 	}
 
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+
+	public class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		protected String doInBackground(String... urls) {
 
 			return GET(urls[0], major, minor);
@@ -63,13 +120,15 @@ public class BookingActivity extends Activity {
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
-			Toast.makeText(getBaseContext(), "Connected!", Toast.LENGTH_LONG).show();
-			
+			if(result != null){
+				Toast.makeText(getBaseContext(), "Connected!", Toast.LENGTH_LONG).show();
+			}
+		
 			if (result == null) {
 				Log.d("beacons", "No the result was null");
 			}
 			else{
-				Log.d("beacons", result);
+//				Log.d("beacons", result);
 			}
 			
 			//etResponse.setText(result);
@@ -89,45 +148,19 @@ public class BookingActivity extends Activity {
 
 			// receive response as inputStream
 			inputStream = httpResponse.getEntity().getContent();
-
-			// convert inputstream to string
-			if(inputStream != null)
-				result = convertInputStreamToString(inputStream);
-			else
-				Log.d("beacons", "Did not work!");
-			
-			 
-			
-			JSONObject json = new JSONObject(result);
-			
-			JSONArray room = json.toJSONArray(json.names());
-			
-
-			
-			Iterator<String> keys = json.keys();
-			while (keys.hasNext()){
-				
-				JSONObject value = json.getJSONObject(keys.next());
-				String rName = value.getString("name");				
-				Log.e("JSON","Room Name: "+ rName);
-
-			    String capactity = json.getString("capacity");
-			    Log.e("JSON","Capacity : "+ capactity);
-			}
-//			JSONObject jsonRoom = json.getJSONArray(0).optJSONObject(0);
-			
-			
-			
-			Log.d("JSON", room.get(1).toString());
-//			String str_value=jsonRoom.getString("Room");
+			//Log.d("beacons", inputStream.toString());
+			result = convertInputStreamToString(inputStream);
 
 		} catch (Exception e) {
 			Log.d("InputStream", e.getLocalizedMessage());
 		}
-		Log.d("beacons", result);
+		Log.d("beacons","connected");
+		Log.d("beacons",result);
 		return result;
 	}
 
+	 
+	
 	private static String convertInputStreamToString(InputStream inputStream) throws IOException{
 		BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
 		String line = "";
@@ -140,77 +173,4 @@ public class BookingActivity extends Activity {
 
 	}
 
-
-//private BeaconConnection.ConnectionCallback createConnectionCallback() {
-//    return new BeaconConnection.ConnectionCallback() {
-//      @Override public void onAuthenticated(final BeaconConnection.BeaconCharacteristics beaconChars) {
-//        runOnUiThread(new Runnable() {
-//          @Override public void run() {
-//            //statusView.setText("Status: Connected to beacon");
-//            StringBuilder sb = new StringBuilder()
-//                //.append("Major: ").append(beacon.getMajor()).append("\n")
-//                //.append("Minor: ").append(beacon.getMinor()).append("\n")
-//                .append("Advertising interval: ").append(beaconChars.getAdvertisingIntervalMillis()).append("ms\n")
-//                .append("Broadcasting power: ").append(beaconChars.getBroadcastingPower()).append(" dBm\n")
-//                .append("Battery: ").append(beaconChars.getBatteryPercent()).append(" %");
-////            beaconDetailsView.setText(sb.toString());
-////            minorEditView.setText(String.valueOf(beacon.getMinor()));
-////            afterConnectedView.setVisibility(View.VISIBLE);
-//          }
-//        });
-//      }
-//
-//      @Override public void onAuthenticationError() {
-//        runOnUiThread(new Runnable() {
-//          @Override public void run() {
-//           //.setText("Status: Cannot connect to beacon. Authentication problems.");
-//          }
-//        });
-//      }
-//
-//      @Override public void onDisconnected() {
-//        runOnUiThread(new Runnable() {
-//          @Override public void run() {
-//           // statusView.setText("Status: Disconnected from beacon");
-//          }
-//        });
-//      }
-//    };
-//  }
 }
-//	protected HttpResponse Connect(int major, int minor){
-
-
-
-
-//	public static String convertStreamToString(InputStream inputStream) throws IOException {
-//        if (inputStream != null) {
-//            Writer writer = new StringWriter();
-//
-//            char[] buffer = new char[1024];
-//            try {
-//                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),1024);
-//                int n;
-//                while ((n = reader.read(buffer)) != -1) {
-//                    writer.write(buffer, 0, n);
-//                }
-//            } finally {
-//                inputStream.close();
-//            }
-//            return writer.toString();
-//        } else {
-//            return "";
-//        }
-//    }
-
-
-//	protected void getDetails(){
-//		final TextView majorTextView;
-//	    final TextView minorTextView;
-//	    ViewHolder(View view) {
-//	        majorTextView = (TextView) view.findViewWithTag("major");
-//	        minorTextView = (TextView) view.findViewWithTag("minor");
-//	    }
-//	}
-
-//}
