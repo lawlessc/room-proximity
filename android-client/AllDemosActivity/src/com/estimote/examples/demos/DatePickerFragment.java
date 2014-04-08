@@ -22,7 +22,7 @@ implements DatePickerDialog.OnDateSetListener {
 
 		// Create a new instance of DatePickerDialog and return it
 		//return new DatePickerDialog(getActivity(),(PostBookingActivity)getActivity(), this, year, month, day);
-		return new DatePickerDialog(getActivity(),(PostBookingActivity)getActivity(), year, month, day);
+		return new DatePickerDialog(getActivity(),(BookingActivity)getActivity(), year, month, day);
 	}
 
 	public void onDateSet(DatePicker view, int year, int month, int day) {		
