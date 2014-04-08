@@ -48,7 +48,7 @@ public class PostBookingActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
-				asyncHttpPost.execute("http://localhost:8080/rooms/" + room + "/booking");
+				asyncHttpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
 			}
 		});
 		}

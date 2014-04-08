@@ -53,7 +53,8 @@ public class BookingActivity extends ListActivity {
 		ArrayList<JSONObject> listItems = new ArrayList<JSONObject>();
 
 		try {
-			room = new HttpAsyncTask().execute("http://localhost:8080/" + major + "/" + minor).get();
+			room = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
+			
 			json = new JSONObject(room);
 			jBookings = json.getJSONObject("bookingsDetails");
 			JSONArray bookingArray = jBookings.getJSONArray("bookingArray");
