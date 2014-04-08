@@ -32,7 +32,6 @@ import com.estimote.sdk.Beacon;
 public class BookingActivity extends ListActivity {
 	
 	private static final String TAG = BookingActivity.class.getSimpleName();
-	//private Beacon beacon;
 	private int major;
 	private int minor;
 	String room = null;
@@ -56,7 +55,7 @@ public class BookingActivity extends ListActivity {
 			room = new HttpAsyncTask().execute("http://localhost:8080/" + major + "/" + minor).get();
 			json = new JSONObject(room);
 			jBookings = json.getJSONObject("bookingsDetails");
-			JSONArray bookingArray = jBookings.getJSONArray("bookingArray");
+			JSONArray bookingArray = jBookings.getJSONArray("bookings");
 			Log.e("JSON", bookingArray.toString());
 
 			for(int i = 0 ; i < bookingArray.length() ; i++ ){		
@@ -82,8 +81,8 @@ public class BookingActivity extends ListActivity {
 	public void makeBooking(View view) throws JSONException{		
 		Intent i = new Intent(getApplicationContext(), PostBookingActivity.class);
 		Log.e("Context",getApplicationContext().toString());
-
-		String rName = jBookings.getString("roomname").toString();
+//		String rName = jBookings.getString("roomname").toString();
+		String rName = "solas";
 		Log.e("JSON", rName);
 		i.putExtra("roomname", rName );
 		startActivity(i);

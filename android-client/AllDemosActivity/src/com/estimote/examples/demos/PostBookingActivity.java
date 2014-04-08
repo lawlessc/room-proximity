@@ -18,7 +18,12 @@ import org.apache.http.message.BasicNameValuePair;
 //import com.estimote.examples.demos.BookingActivity.HttpAsyncTask;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,11 +31,15 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
-public class PostBookingActivity extends Activity{
+public class PostBookingActivity extends Activity implements OnDateSetListener, OnTimeSetListener{
+//	int start_hour, start_minute, end_hour, end_minute;
+	
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,15 +52,43 @@ public class PostBookingActivity extends Activity{
 		Button book = (Button) findViewById(R.id.btnSave);
 		book.setOnClickListener(new OnClickListener() {
 
-		
-			
 			@Override
 			public void onClick(View v) {
 				AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
 				asyncHttpPost.execute("http://localhost:8080/rooms/" + room + "/booking");
 			}
 		});
-		}
+		
+		 //initialize them to current date in onStart()/onCreate()
+//		DatePickerDialog.OnDateSetListener from_dateListener,to_dateListener;
+		
+		EditText mEditDate = (EditText) findViewById(R.id.editDate);
+		mEditDate.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	        	showDatePickerDialog(v);
+	        }
+
+	    });
+		
+		EditText mEditStartT = (EditText) findViewById(R.id.editStartTime);
+		mEditStartT.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	        	showTimePickerDialog(v);
+	        }
+
+	    });
+		
+		EditText mEditEndT = (EditText) findViewById(R.id.editEndTime);
+		mEditEndT.setOnClickListener(new View.OnClickListener() {
+	        @Override
+	        public void onClick(View v) {
+	        	showTimePickerDialog(v);
+	        }
+
+	    });
+		}	
 
 	public void showTimePickerDialog(View v) {
 	    DialogFragment newFragment = new TimePickerFragment();
@@ -131,6 +168,44 @@ public class PostBookingActivity extends Activity{
 		}
 		
 	}
+
+	@Override
+	public void onDateSet(DatePicker view, int year, int monthOfYear,
+			int dayOfMonth) {
+		 ((EditText) findViewById(R.id.editDate)).setText( dayOfMonth + "/" + monthOfYear + "/" + year);
+		
+	}
+
+	@Override
+	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+		//messy, change later
+		Log.e("Edit",((EditText) findViewById(R.id.editStartTime)).getText().toString());
+		
+//		if (((EditText) findViewById(R.id.editStartTime)).getText().toString() != ""){
+			((EditText) findViewById(R.id.editStartTime)).setText( hourOfDay + ":" + minute);
+//		} else{
+//			((EditText) findViewById(R.id.editStartTime)).setText( hourOfDay + ":" + minute);
+//		}
+		
+		
+	}
+
+	
+//	int TIME_PICKER_START = 0;
+//	int TIME_PICKER_END = 1;
+//	
+//	@Override
+//	protected Dialog onCreateDialog(int id) {
+//
+//	    switch(id){
+//	        case TIME_PICKER_START:
+//	                return new TimePickerDialog(this, start_timeListener, start_hour, start_minute, true); 
+//	            case TIME_PICKER_END:
+//	                return new TimePickerDialog(this, end_timeListener, end_hour, end_minute, true);
+//	    }
+//	        return null;
+//	}
+	
 }	
 		
 	

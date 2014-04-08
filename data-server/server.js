@@ -20,7 +20,7 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 
 //start server
-var server = app.listen(8888, function() {
+var server = app.listen(8080, function() {
     //app.writeHead(200, {'Content-Type': 'text/plain'}); 
     console.log('Listening on port %d', server.address().port);
 });

@@ -48,8 +48,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:tag="editDate"
-            android:inputType="date" />
+            android:focusable="false"
+            android:inputType="date"
+            android:tag="editDate" />
 
     </LinearLayout>
     
@@ -71,7 +72,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:tag="editStartTime"
-            android:inputType="time" />
+            android:inputType="time"
+             android:focusable="false" />   
         
     </LinearLayout>
     
@@ -92,8 +94,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:tag="editEndTime"
-            android:inputType="time" />
+            android:focusable="false"
+            android:inputType="time"
+            android:tag="editEndTime" />
         
     </LinearLayout>
     

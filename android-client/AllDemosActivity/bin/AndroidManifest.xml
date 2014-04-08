@@ -35,15 +35,6 @@
         android:name="com.estimote.examples.demos.ListBeaconsActivity"
         android:label="Select Beacon"
         android:screenOrientation="portrait" />
-    <!-- <activity
-        android:name="com.estimote.examples.demos.ListBeaconsActivity"
-        android:label="iBeacons"
-        android:screenOrientation="portrait">
-          <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity> -->
     <activity
         android:name="com.estimote.examples.demos.DistanceBeaconActivity"
         android:label="Distance Demo"
