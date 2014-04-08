@@ -95,6 +95,8 @@
     
     self.timeSlots = [[NSMutableArray alloc] initWithObjects:@"9-10", @"10-11", @"11-12", @"12-13", @"13-14", @"14-15", @"15-16", @"16-17", nil];
     
+    self.timeTF.text = @"9-10";
+    
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -218,33 +220,39 @@
 
 
 - (IBAction)saveTheBooking:(id)sender {
-    NSString *urlString = [NSString stringWithFormat:@"http://yuweixia.local:8888/rooms/%@/booking", self.room.name];
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    NSString *date = self.dateTF.text;
-    NSString *timeslot = self.timeTF.text;
-    NSArray *timeArray = [timeslot componentsSeparatedByString:@"-"];
-    NSString *startTime = timeArray[0];
-    NSString *endTime = timeArray[1];
-    NSString *meetingName = self.meetingNameTF.text;
-    NSString *users = self.usersTF.text;
-    NSString *bodyString = [NSString stringWithFormat:@"date=%@&startTime=%@&endTime=%@&meetingName=%@&users=%@",
-                            date, startTime, endTime, meetingName, users];
-    [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    //    NSURLResponse *response;
-    //    NSError *error;
-    
-    //NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if (connection) {
-        NSLog(@"connecting......");
-        self.responseData = [NSMutableData data];
+    if (![self.timeTF.text isEqualToString:@""] && ![self.meetingNameTF.text isEqualToString:@""] && ![self.usersTF.text isEqualToString:@""]) {
+        NSString *urlString = [NSString stringWithFormat:@"http://yuweixia.local:8888/rooms/%@/booking", self.room.name];
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        NSString *date = self.dateTF.text;
+        NSString *timeslot = self.timeTF.text;
+        NSArray *timeArray = [timeslot componentsSeparatedByString:@"-"];
+        NSString *startTime = timeArray[0];
+        NSString *endTime = timeArray[1];
+        NSString *meetingName = self.meetingNameTF.text;
+        NSString *users = self.usersTF.text;
+        NSString *bodyString = [NSString stringWithFormat:@"date=%@&startTime=%@&endTime=%@&meetingName=%@&users=%@",
+                                date, startTime, endTime, meetingName, users];
+        [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //    NSURLResponse *response;
+        //    NSError *error;
+        
+        //NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+        if (connection) {
+            NSLog(@"connecting......");
+            self.responseData = [NSMutableData data];
+        }
+        //NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+        //[connection start];
+    } else {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"Please provide all booking information" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [message show];
     }
-    //NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-    //[connection start];
+    
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
