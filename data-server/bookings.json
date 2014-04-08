@@ -2,7 +2,7 @@
     "rooms": [
         {
             "roomname": "solas",
-            "bookingArray": [
+            "bookings": [
                 {
                     "URI": "solas/booking1",
                     "date": "7/4/14",
@@ -23,7 +23,7 @@
         },
         {
             "roomname": "nova",
-            "bookingArray": [
+            "bookings": [
                 {
                     "URI": "nova/booking1",
                     "date": "7/4/14",
@@ -52,7 +52,7 @@
         },
         {
             "roomname": "scotia",
-            "bookingArray": [
+            "bookings": [
                 {
                     "URI": "scotia/booking1",
                     "date": "7/4/14",

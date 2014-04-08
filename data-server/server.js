@@ -193,7 +193,7 @@ app.get('/rooms/:room/booking/:date', function(req, res){
 	console.log("room: " + room);
 	console.log("date: " + date);
 	
-    var jBookings = getJson('bookings.json');
+  var jBookings = getJson('bookings.json');
 	var strBookings;
     for (var i = 0; i< jBookings['rooms'].length; i++) {
         if (room == jBookings['rooms'][i].roomname){
