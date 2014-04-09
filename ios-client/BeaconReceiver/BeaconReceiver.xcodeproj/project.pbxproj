@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CC156F3318EEE79D00042A61 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC156F3218EEE79D00042A61 /* BookViewController.m */; };
 		CC186C2118EAD58700A81BFD /* 11.json in Resources */ = {isa = PBXBuildFile; fileRef = CC186C2018EAD58700A81BFD /* 11.json */; };
 		CCA6ED6818D9F93900E4C264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6ED6718D9F93900E4C264 /* Foundation.framework */; };
 		CCA6ED6A18D9F93900E4C264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6ED6918D9F93900E4C264 /* CoreGraphics.framework */; };
@@ -27,8 +26,8 @@
 		CCA6EDA518DC818200E4C264 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6EDA418DC818200E4C264 /* SystemConfiguration.framework */; };
 		CCA6EDA718DC81A700E4C264 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6EDA618DC81A700E4C264 /* libEstimoteSDK.a */; };
 		CCA6EDAA18DCA75D00E4C264 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA6EDA918DCA75D00E4C264 /* DetailsTableViewController.m */; };
+		CCB37FD918F5505B005E743B /* Booking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB37FD818F5505B005E743B /* Booking.m */; };
 		CCDFB5E818E9BBC800397DA8 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5E718E9BBC800397DA8 /* Room.m */; };
-		CCDFB5EB18E9C3C000397DA8 /* Booking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5EA18E9C3C000397DA8 /* Booking.m */; };
 		CCDFB5EE18E9C50300397DA8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5ED18E9C50300397DA8 /* User.m */; };
 		CCDFB5F118E9C9CD00397DA8 /* Beacon.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5F018E9C9CD00397DA8 /* Beacon.m */; };
 /* End PBXBuildFile section */
@@ -44,8 +43,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CC156F3118EEE79D00042A61 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
-		CC156F3218EEE79D00042A61 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
 		CC186C2018EAD58700A81BFD /* 11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 11.json; sourceTree = "<group>"; };
 		CCA6ED6418D9F93900E4C264 /* BeaconReceiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconReceiver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA6ED6718D9F93900E4C264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -71,10 +68,10 @@
 		CCA6EDA618DC81A700E4C264 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEstimoteSDK.a; path = EstimoteSDK/libEstimoteSDK.a; sourceTree = "<group>"; };
 		CCA6EDA818DCA75D00E4C264 /* DetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsTableViewController.h; sourceTree = "<group>"; };
 		CCA6EDA918DCA75D00E4C264 /* DetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewController.m; sourceTree = "<group>"; };
+		CCB37FD718F5505B005E743B /* Booking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Booking.h; sourceTree = "<group>"; };
+		CCB37FD818F5505B005E743B /* Booking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Booking.m; sourceTree = "<group>"; };
 		CCDFB5E618E9BBC800397DA8 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
 		CCDFB5E718E9BBC800397DA8 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
-		CCDFB5E918E9C3C000397DA8 /* Booking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Booking.h; path = ../Booking.h; sourceTree = "<group>"; };
-		CCDFB5EA18E9C3C000397DA8 /* Booking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Booking.m; path = ../Booking.m; sourceTree = "<group>"; };
 		CCDFB5EC18E9C50300397DA8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CCDFB5ED18E9C50300397DA8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CCDFB5EF18E9C9CD00397DA8 /* Beacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beacon.h; sourceTree = "<group>"; };
@@ -144,8 +141,8 @@
 		CCA6ED6D18D9F93900E4C264 /* BeaconReceiver */ = {
 			isa = PBXGroup;
 			children = (
-				CCDFB5E918E9C3C000397DA8 /* Booking.h */,
-				CCDFB5EA18E9C3C000397DA8 /* Booking.m */,
+				CCB37FD718F5505B005E743B /* Booking.h */,
+				CCB37FD818F5505B005E743B /* Booking.m */,
 				CCA6ED7618D9F93900E4C264 /* AppDelegate.h */,
 				CCA6ED7718D9F93900E4C264 /* AppDelegate.m */,
 				CCA6ED7918D9F93900E4C264 /* Main.storyboard */,
@@ -162,8 +159,6 @@
 				CCDFB5EF18E9C9CD00397DA8 /* Beacon.h */,
 				CCDFB5F018E9C9CD00397DA8 /* Beacon.m */,
 				CC186C2018EAD58700A81BFD /* 11.json */,
-				CC156F3118EEE79D00042A61 /* BookViewController.h */,
-				CC156F3218EEE79D00042A61 /* BookViewController.m */,
 			);
 			path = BeaconReceiver;
 			sourceTree = "<group>";
@@ -298,13 +293,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC156F3318EEE79D00042A61 /* BookViewController.m in Sources */,
 				CCDFB5E818E9BBC800397DA8 /* Room.m in Sources */,
 				CCDFB5EE18E9C50300397DA8 /* User.m in Sources */,
 				CCA6EDAA18DCA75D00E4C264 /* DetailsTableViewController.m in Sources */,
 				CCDFB5F118E9C9CD00397DA8 /* Beacon.m in Sources */,
 				CCA6ED7E18D9F93900E4C264 /* ViewController.m in Sources */,
-				CCDFB5EB18E9C3C000397DA8 /* Booking.m in Sources */,
+				CCB37FD918F5505B005E743B /* Booking.m in Sources */,
 				CCA6ED7818D9F93900E4C264 /* AppDelegate.m in Sources */,
 				CCA6ED7418D9F93900E4C264 /* main.m in Sources */,
 			);

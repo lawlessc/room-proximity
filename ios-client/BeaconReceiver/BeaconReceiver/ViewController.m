@@ -93,8 +93,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.beacons count];
     //return 1;
+    return [self.beacons count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,8 +103,6 @@
     ESTBeacon *beacon = [self.beacons objectAtIndex:indexPath.row];
     NSString *majorString = beacon.major.stringValue;
     NSString *minorString = beacon.minor.stringValue;
-    
-    
     
     NSString* beaconURL = [NSString stringWithFormat:@"http://yuweixia.local:8888/%@/%@", majorString, minorString];
     

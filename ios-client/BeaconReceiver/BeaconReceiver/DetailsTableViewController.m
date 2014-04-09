@@ -7,7 +7,6 @@
 //
 
 #import "DetailsTableViewController.h"
-#import "BookViewController.h"
 #import "Beacon.h"
 #import "Room.h"
 #import "Booking.h"
@@ -42,29 +41,17 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"11" ofType:@"json"];
     NSString *majorString = self.beacon.major.stringValue;
     NSString *minorString = self.beacon.minor.stringValue;
-    
-    //NSString* url = [NSString stringWithFormat:@"http://10.29.35.156:3000/beacons/%@/%@", majorString, minorString];
     
     NSString* url = [NSString stringWithFormat:@"http://yuweixia.local:8888/%@/%@/redirect", majorString, minorString];
     NSURL *jsonURL = [NSURL URLWithString:url];
     NSData *jsonData = [NSData dataWithContentsOfURL:jsonURL];
-    //NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@", jsonString);
+
     NSDictionary *twoObjects = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
     
-    //NSString *roomDetails = [NSString stringWithFormat:@"%@", [twoObjects objectForKey:@"roomDetails"]];
     NSDictionary *roomDetails = [twoObjects objectForKey:@"roomDetails"];
     NSDictionary *bookings = [twoObjects objectForKey:@"bookings"];
-//    NSLog(@"%@", roomDetails);
-//    NSLog(@"%@", bookings);
     
     self.room = [[Room alloc] initWithRoomDictionary:roomDetails];
     
@@ -74,14 +61,7 @@
         Booking *booking = [[Booking alloc] initWithBookingDictionary:bookingJson];
         [self.bookings addObject:booking];
     }
-    
-    
-//    NSLog(@"1------ %@", self.room.name);
-//    NSLog(@"1------ %@", self.room.location);
-//    NSLog(@"1------ %@", [NSString stringWithFormat:@"%d", self.room.capacity]);
-//    NSLog(@"1------ %@", self.room.phoneNumber.stringValue);
-//    NSLog(@"1------ %@", self.room.owner);
-//    NSLog(@"1------ %@", (self.room.conferencing) ? @"Yes" : @"No");
+
     self.name.text = self.room.name;
     self.location.text = self.room.location;
     self.capacity.text = [NSString stringWithFormat:@"%d", self.room.capacity];
@@ -115,21 +95,7 @@
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     [self.timeTF setInputView:self.pickerView];
-    
-    
-    
-//    Beacon *ibeacon = [[Beacon alloc] initWithUserURL:url];
-//    
-//    NSLog(@"1------ %@", ibeacon.UUID.UUIDString);
-//    self.UUID.text = ibeacon.UUID.UUIDString;
-//    NSLog(@"2------%@", ibeacon.major.stringValue);
-//    self.major.text = [ibeacon.major stringValue];
-//    NSLog(@"3------");
-//    self.minor.text = [ibeacon.minor stringValue];
-//    NSLog(@"4------%@", ibeacon.color);
-//    self.color.text = ibeacon.color;
-//    NSLog(@"5------%@", ibeacon.locationURI);
-//    self.locationURL.text = ibeacon.locationURI;
+
 }
 
 - (NSArray *)getAvailableTimeSlotsForTheDate: (NSString *)dateString {
@@ -147,8 +113,6 @@
         //NSLog(@"%@", timeSlot);
         [self.timeSlots removeObject:timeSlot];
     }
-    
-    //NSMutableArray *availableTimeSlots = [NSMutableArray array];
     
     return self.timeSlots;
 }
@@ -206,19 +170,6 @@
     return 0;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"BookTheRoom"]) {
-        NSLog(@"Book the room...");
-        BookViewController *bookViewController = [segue destinationViewController];
-        
-        bookViewController.room = self.room;
-        bookViewController.bookings = self.bookings;
-        
-    }
-}
-
-
 - (IBAction)saveTheBooking:(id)sender {
     if (![self.timeTF.text isEqualToString:@""] && ![self.meetingNameTF.text isEqualToString:@""] && ![self.usersTF.text isEqualToString:@""]) {
         NSString *urlString = [NSString stringWithFormat:@"http://yuweixia.local:8888/rooms/%@/booking", self.room.name];
@@ -236,18 +187,12 @@
                                 date, startTime, endTime, meetingName, users];
         [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
         
-        //    NSURLResponse *response;
-        //    NSError *error;
-        
-        //NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         
         if (connection) {
             NSLog(@"connecting......");
             self.responseData = [NSMutableData data];
         }
-        //NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-        //[connection start];
     } else {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"Please provide all booking information" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [message show];
@@ -267,12 +212,7 @@
     
     NSLog(@"finished: %@", responseString);
     
-    //[self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
 }
 
 - (void)dismissTheInputView:(id)sender {
