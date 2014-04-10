@@ -7,16 +7,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >   
-        
+        android:orientation="horizontal" >
+
         <TextView
             android:id="@+id/txtMeetingName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MeetingName"
-            android:textAppearance="?android:attr/textAppearanceMedium" >
-            
-            </TextView>
+            android:layout_weight="1"
+            android:text="Name: "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
             
             <EditText
             android:id="@+id/edtMeetingName"
@@ -36,42 +35,46 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <Button
+        <TextView
+            android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="showDatePickerDialog"
-            android:text="Set Date" />
+            android:layout_weight="1"
+            android:text="Date"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editDate"
+            android:id="@+id/edtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:tag="editDate"
-            android:inputType="date" />
-
-    </LinearLayout>
+            android:inputType="date"
+            android:onClick="showDatePickDialog"
+            android:focusable="false"/>
+</LinearLayout>
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <Button
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txtStartT"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:onClick="showTimePickerDialog"
-            android:text="Set Start Time" />
+            android:text="Start Time:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editStartTime"
+            android:id="@+id/edtStartTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:tag="editStartTime"
-            android:inputType="time" />
+            android:focusable="false"
+            android:inputType="time"
+            android:onClick="InputStartTime" />
         
     </LinearLayout>
     
@@ -80,20 +83,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <Button
+        <TextView
+            android:id="@+id/txtEndT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="showTimePickerDialog"
-            android:text="Set End Time" />
+            android:layout_weight="1"
+            android:text="End Time:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editEndTime"
+            android:id="@+id/edtEndTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:tag="editEndTime"
-            android:inputType="time" />
+            android:focusable="false"
+            android:inputType="time"
+            android:onClick="InputEndTime" />
         
     </LinearLayout>
     
@@ -102,6 +108,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
         
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
     </LinearLayout>
 
     <Button
