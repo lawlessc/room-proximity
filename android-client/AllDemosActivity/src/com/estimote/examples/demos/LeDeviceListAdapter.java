@@ -85,6 +85,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
   private void bind(Beacon beacon, View view) {
     ViewHolder holder = (ViewHolder) view.getTag();
+<<<<<<< HEAD
     //holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
     //holder.majorTextView.setText("Major: " + beacon.getMajor());
     //holder.minorTextView.setText("Minor: " + beacon.getMinor());
@@ -96,10 +97,19 @@ public class LeDeviceListAdapter extends BaseAdapter {
     //beacon. 
     //beacon.get 
     //  beacon.g
+=======
+    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
+    holder.majorTextView.setText("Major: " + beacon.getMajor());
+    holder.minorTextView.setText("Minor: " + beacon.getMinor());
+    holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+    holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+    holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
     
     major = beacon.getMajor();
     minor = beacon.getMinor();
     String colour ="";
+<<<<<<< HEAD
     String room ="";
     
     
@@ -183,6 +193,58 @@ public class LeDeviceListAdapter extends BaseAdapter {
     
     
     
+=======
+//    //System.out.println("about to try");
+//    
+//    try {
+//		String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
+//		JSONObject json = new JSONObject(beaconData);
+//		colour =  json.getString("colour");
+//	
+//	} catch (InterruptedException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (ExecutionException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (JSONException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//    
+//    
+//    //System.out.println("COLOUR IS ---------------"+colour+"-----------------------");
+//    //this shouldn't be hardcoded, we need to get this from the server!
+    
+    if(major == 24723){
+    	view.setBackgroundColor(Color.rgb(173, 216, 230));
+    }
+    else if(major == 55149){
+    	view.setBackgroundColor(Color.rgb(60, 179, 113));
+    }
+    else if(major == 666){
+    	view.setBackgroundColor(Color.rgb(0, 0, 128));
+    }
+    else{
+    	//Log.e("FAIL", col);
+    	view.setBackgroundColor(Color.rgb(255, 0, 0));
+    }
+    
+    
+//    if(colour.equalsIgnoreCase("blue")){
+//    	view.setBackgroundColor(Color.rgb(173, 216, 230));
+//    }
+//    else if(colour.equalsIgnoreCase("green")){
+//    	view.setBackgroundColor(Color.rgb(60, 179, 113));
+//    }
+//    else if(colour.equalsIgnoreCase("navy")){
+//    	view.setBackgroundColor(Color.rgb(0, 0, 128));
+//    }
+//    else{
+//    	//Log.e("FAIL", col);
+//    	view.setBackgroundColor(Color.rgb(255, 0, 0));
+//    }
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
   }
 
   private View inflateIfRequired(View view, int position, ViewGroup parent) {
@@ -217,8 +279,14 @@ public class LeDeviceListAdapter extends BaseAdapter {
     	
     }
     
+<<<<<<< HEAD
   }
   
+=======
+
+  }
+
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
 	public class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		protected String doInBackground(String... urls) {
 

@@ -5,7 +5,11 @@
 
     <TableLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="match_parent"
+=======
+        android:layout_height="wrap_content"
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
         android:stretchColumns="0" >
 
         <TableRow
@@ -152,6 +156,7 @@
                 android:ems="10" />
         </LinearLayout>
         
+<<<<<<< HEAD
           <LinearLayout
               android:layout_width="fill_parent"
               android:layout_height="0dp"
@@ -169,6 +174,23 @@
                  android:layout_width="fill_parent"
                  android:layout_height="wrap_content"
                  android:text="Book" />
+=======
+         <View android:layout_height="220dp" />
+         
+         ><LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+            
+            <Button
+                    android:id="@+id/btnBook"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Book" />
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
 
         </LinearLayout>
             

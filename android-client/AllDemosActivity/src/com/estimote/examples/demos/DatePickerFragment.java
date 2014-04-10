@@ -21,10 +21,16 @@ implements DatePickerDialog.OnDateSetListener {
 		int day = c.get(Calendar.DAY_OF_MONTH);
 
 		// Create a new instance of DatePickerDialog and return it
-		return new DatePickerDialog(getActivity(), this, year, month, day);
+		//return new DatePickerDialog(getActivity(),(PostBookingActivity)getActivity(), this, year, month, day);
+		return new DatePickerDialog(getActivity(),(PostBookingActivity)getActivity(), year, month, day);
 	}
 
 	public void onDateSet(DatePicker view, int year, int month, int day) {		
-		
+
+		//mEditInit.setText( day + "/" + month + "/" + year);
+	}
+	
+	public void onDateChanged (DatePicker view, int year, int month, int day){
+		//mEditInit.setText( day + "/" + month + "/" + year);
 	}
 }

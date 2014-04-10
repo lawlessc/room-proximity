@@ -26,18 +26,33 @@
         android:name="com.estimote.examples.demos.AllDemosActivity"
         android:label="Estimote Demos"
         android:screenOrientation="portrait">
+<<<<<<< HEAD
     
+=======
+     <!--  <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter> -->
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
     </activity>
  
     <activity
         android:name="com.estimote.examples.demos.ListBeaconsActivity"
+<<<<<<< HEAD
         android:label="iBeacons"
+=======
+        android:label="Estimote Demos"
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
         android:screenOrientation="portrait">
-          <intent-filter>
+       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+<<<<<<< HEAD
     </activity>
+=======
+      </activity>
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
     <activity
         android:name="com.estimote.examples.demos.DistanceBeaconActivity"
         android:label="Distance Demo"

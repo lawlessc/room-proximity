@@ -177,11 +177,16 @@ public class ListBeaconsActivity extends Activity {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
+<<<<<<< HEAD
 		//intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
 		
 		//Intent intent = new Intent(ListBeaconsActivity.this, clazz);
 		intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
 		startActivity(intent);
+=======
+        intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+        startActivity(intent); 
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
       }
     };
   }

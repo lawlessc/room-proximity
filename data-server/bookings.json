@@ -6,16 +6,21 @@
                 {
                     "URI": "solas/booking1",
                     "date": "7/4/14",
+<<<<<<< HEAD
                     "StartT": "1600",
                     "EndT": "1730",
+=======
+                    "StartT": "09:00",
+                    "EndT": "10:00",
+>>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
                     "MeetingName": "CTO Planning",
                     "Users": "David Bowman"
                 },
                 {
                     "URI": "solas/booking2",
                     "date": "7/4/14",
-                    "StartT": "1100",
-                    "EndT": "1200",
+                    "StartT": "11:00",
+                    "EndT": "12:00",
                     "MeetingName": "CATE Update",
                     "Users": "Hank Hill"
                 }
@@ -27,26 +32,34 @@
                 {
                     "URI": "nova/booking1",
                     "date": "7/4/14",
-                    "StartT": "0930",
-                    "EndT": "1030",
+                    "StartT": "09:30",
+                    "EndT": "10:30",
                     "MeetingName": "ATIS Planning",
                     "Users": "Hank Hill"
                 },
                 {
                     "URI": "nova/booking2",
                     "date": "7/4/14",
-                    "StartT": "1200",
-                    "EndT": "1300",
+                    "StartT": "12:00",
+                    "EndT": "13:00",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Bobby Hill"
                 },
                 {
                     "URI": "nova/booking3",
                     "date": "7/4/14",
-                    "StartT": "1500",
-                    "EndT": "1600",
+                    "StartT": "15:00",
+                    "EndT": "16:00",
                     "MeetingName": "Team Meeting",
                     "Users": "Hank Hill"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "9/3/2014",
+                    "StartT": "15:12",
+                    "EndT": "15:12",
+                    "MeetingName": "Meat ",
+                    "Users": "appUser"
                 }
             ]
         },
@@ -56,16 +69,16 @@
                 {
                     "URI": "scotia/booking1",
                     "date": "7/4/14",
-                    "StartT": "1500",
-                    "EndT": "1600",
+                    "StartT": "15:00",
+                    "EndT": "16:00",
                     "MeetingName": "Team Meeting",
                     "Users": "Hank Hill"
                 },
                 {
                     "URI": "scotia/booking2",
                     "date": "7/4/14",
-                    "StartT": "1200",
-                    "EndT": "1300",
+                    "StartT": "12:00",
+                    "EndT": "13:00",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Hank Hill"
                 }
