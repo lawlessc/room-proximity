@@ -6,8 +6,8 @@
                 {
                     "URI": "solas/booking1",
                     "date": "7/4/14",
-                    "StartT": "0900",
-                    "EndT": "1000",
+                    "StartT": "1600",
+                    "EndT": "1730",
                     "MeetingName": "CTO Planning",
                     "Users": "David Bowman"
                 },

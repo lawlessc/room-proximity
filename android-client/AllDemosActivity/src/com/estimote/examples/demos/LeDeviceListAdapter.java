@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,12 +85,14 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
   private void bind(Beacon beacon, View view) {
     ViewHolder holder = (ViewHolder) view.getTag();
-    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
-    holder.majorTextView.setText("Major: " + beacon.getMajor());
-    holder.minorTextView.setText("Minor: " + beacon.getMinor());
-    holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-    holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
-    holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
+    //holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
+    //holder.majorTextView.setText("Major: " + beacon.getMajor());
+    //holder.minorTextView.setText("Minor: " + beacon.getMinor());
+    //holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+    //holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+    //holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
+    
+    
     //beacon. 
     //beacon.get 
     //  beacon.g
@@ -97,21 +100,20 @@ public class LeDeviceListAdapter extends BaseAdapter {
     major = beacon.getMajor();
     minor = beacon.getMinor();
     String colour ="";
+    String room ="";
+    
+    
+
+    
+    
     //System.out.println("about to try");
     try {
 		String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
 		JSONObject json = new JSONObject(beaconData);
+		
 		 colour =  json.getString("colour");
-		// JSONArray bookingArray = jBookings.getJSONArray("bookingArray");
-		//col =  colour;
-		//Log.e("JSON", colour.toString());
-       // System.out.println("COLOUR IS ============="+colour+"=============");
-		//for(int i = 0 ; i < bookingArray.length() ; i++ ){		
-		//	listItems.add(bookingArray.getJSONObject(i));
-		//}
-
-		//adapter=new ArrayAdapter<JSONObject>(this, android.R.layout.simple_list_item_1,listItems);
-		//setListAdapter(adapter);
+		 room =  json.getString("room");
+		
 	
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
@@ -124,31 +126,60 @@ public class LeDeviceListAdapter extends BaseAdapter {
 		e.printStackTrace();
 	}
     
+    holder.roomNameView.setText(room);
     
     //System.out.println("COLOUR IS ---------------"+colour+"-----------------------");
     //this shouldn't be hardcoded, we need to get this from the server!
     if(colour.equalsIgnoreCase("blue"))
     {
     view.setBackgroundColor(Color.rgb(173, 216, 230));
+    holder.roomNameView.setTextColor(Color.WHITE);
     }
     else if(colour.equalsIgnoreCase("green"))
     {
     view.setBackgroundColor(Color.rgb(60, 179, 113));
+    holder.roomNameView.setTextColor(Color.WHITE);
     }
     else if(colour.equalsIgnoreCase("navy"))
     {
-    view.setBackgroundColor(Color.rgb(0, 0, 128));
+    view.setBackgroundColor(Color.rgb(60, 60, 128));
+    holder.roomNameView.setTextColor(Color.WHITE);
     }
-  //  else{
-   // 	Log.e("FAIL", col);
-   //// 	view.setBackgroundColor(Color.rgb(255, 0, 0));
-   // }
-   // view.setBackgroundColor(Color.rgb(255, 0, 0));
-   // if(beacon.getProximityUUID() == "4")
-   // {
-    //view.setBackgroundColor(Color.CYAN);
-   // }
     
+    
+    
+    
+    ///two calls per beacon, probably a better way to do this
+    String availability= "";
+ 
+    try {
+		String roomData = new HttpAsyncTask().execute("http://localhost:8888/room"+ "/" + room).get();
+		JSONObject json = new JSONObject(roomData);
+		availability =  json.getString("available");
+		 //room =  json.getString("room");
+		
+	
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ExecutionException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    System.out.println("IS AVAILABLE?"+availability);
+    if(availability.equalsIgnoreCase("occupied")  )
+    {
+    	holder.availabilityImage.setImageResource(R.drawable.red_dot);
+    	//System.out.printl
+    }
+    else
+    {
+    	
+    	holder.availabilityImage.setImageResource(R.drawable.green_dot);
+    }
     
     
     
@@ -163,20 +194,27 @@ public class LeDeviceListAdapter extends BaseAdapter {
   }
 
   static class ViewHolder {
-    final TextView macTextView;
-    final TextView majorTextView;
-    final TextView minorTextView;
-    final TextView measuredPowerTextView;
-    final TextView rssiTextView;
-    final TextView uuidTextView;
+  //  final TextView macTextView;
+  //  final TextView majorTextView;
+  //  final TextView minorTextView;
+  //  final TextView measuredPowerTextView;
+  //  final TextView rssiTextView;
+  //  final TextView uuidTextView;
+	  final TextView roomNameView;
+	  final ImageView availabilityImage;
 
     ViewHolder(View view) {
-      macTextView = (TextView) view.findViewWithTag("mac");
-      majorTextView = (TextView) view.findViewWithTag("major");
-      minorTextView = (TextView) view.findViewWithTag("minor");
-      measuredPowerTextView = (TextView) view.findViewWithTag("mpower");
-      rssiTextView = (TextView) view.findViewWithTag("rssi");
-      uuidTextView= (TextView) view.findViewWithTag("uuid");
+   //   macTextView = (TextView) view.findViewWithTag("mac");
+   //   majorTextView = (TextView) view.findViewWithTag("major");
+   //   minorTextView = (TextView) view.findViewWithTag("minor");
+   //   measuredPowerTextView = (TextView) view.findViewWithTag("mpower");
+   //   rssiTextView = (TextView) view.findViewWithTag("rssi");
+   //   uuidTextView= (TextView) view.findViewWithTag("uuid");
+    	availabilityImage = (ImageView) view.findViewWithTag("availability");
+    	roomNameView= (TextView) view.findViewWithTag("room");
+    	
+    	
+    	
     }
     
     
