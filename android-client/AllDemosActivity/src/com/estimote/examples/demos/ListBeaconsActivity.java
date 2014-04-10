@@ -176,20 +176,9 @@ public class ListBeaconsActivity extends Activity {
     return new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY) != null) {
-          try {
-            Class<?> clazz = Class.forName(getIntent().getStringExtra(EXTRAS_TARGET_ACTIVITY));
-            
-            Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
-            //intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
-            
-            //Intent intent = new Intent(ListBeaconsActivity.this, clazz);
-            intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
-            startActivity(intent);
-          } catch (ClassNotFoundException e) {
-            Log.e(TAG, "Finding class by name failed", e);
-          }
-        }
+        Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
+        intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+        startActivity(intent); 
       }
     };
   }

@@ -90,68 +90,60 @@ public class LeDeviceListAdapter extends BaseAdapter {
     holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
     holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
     holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
-    //beacon. 
-    //beacon.get 
-    //  beacon.g
     
     major = beacon.getMajor();
     minor = beacon.getMinor();
     String colour ="";
-    //System.out.println("about to try");
-    try {
-		String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
-		JSONObject json = new JSONObject(beaconData);
-		 colour =  json.getString("colour");
-		// JSONArray bookingArray = jBookings.getJSONArray("bookingArray");
-		//col =  colour;
-		//Log.e("JSON", colour.toString());
-       // System.out.println("COLOUR IS ============="+colour+"=============");
-		//for(int i = 0 ; i < bookingArray.length() ; i++ ){		
-		//	listItems.add(bookingArray.getJSONObject(i));
-		//}
-
-		//adapter=new ArrayAdapter<JSONObject>(this, android.R.layout.simple_list_item_1,listItems);
-		//setListAdapter(adapter);
-	
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ExecutionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+//    //System.out.println("about to try");
+//    
+//    try {
+//		String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
+//		JSONObject json = new JSONObject(beaconData);
+//		colour =  json.getString("colour");
+//	
+//	} catch (InterruptedException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (ExecutionException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	} catch (JSONException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//    
+//    
+//    //System.out.println("COLOUR IS ---------------"+colour+"-----------------------");
+//    //this shouldn't be hardcoded, we need to get this from the server!
     
-    
-    //System.out.println("COLOUR IS ---------------"+colour+"-----------------------");
-    //this shouldn't be hardcoded, we need to get this from the server!
-    if(colour.equalsIgnoreCase("blue"))
-    {
-    view.setBackgroundColor(Color.rgb(173, 216, 230));
+    if(major == 24723){
+    	view.setBackgroundColor(Color.rgb(173, 216, 230));
     }
-    else if(colour.equalsIgnoreCase("green"))
-    {
-    view.setBackgroundColor(Color.rgb(60, 179, 113));
+    else if(major == 55149){
+    	view.setBackgroundColor(Color.rgb(60, 179, 113));
     }
-    else if(colour.equalsIgnoreCase("navy"))
-    {
-    view.setBackgroundColor(Color.rgb(0, 0, 128));
+    else if(major == 666){
+    	view.setBackgroundColor(Color.rgb(0, 0, 128));
     }
-  //  else{
-   // 	Log.e("FAIL", col);
-   //// 	view.setBackgroundColor(Color.rgb(255, 0, 0));
-   // }
-   // view.setBackgroundColor(Color.rgb(255, 0, 0));
-   // if(beacon.getProximityUUID() == "4")
-   // {
-    //view.setBackgroundColor(Color.CYAN);
-   // }
+    else{
+    	//Log.e("FAIL", col);
+    	view.setBackgroundColor(Color.rgb(255, 0, 0));
+    }
     
     
-    
-    
+//    if(colour.equalsIgnoreCase("blue")){
+//    	view.setBackgroundColor(Color.rgb(173, 216, 230));
+//    }
+//    else if(colour.equalsIgnoreCase("green")){
+//    	view.setBackgroundColor(Color.rgb(60, 179, 113));
+//    }
+//    else if(colour.equalsIgnoreCase("navy")){
+//    	view.setBackgroundColor(Color.rgb(0, 0, 128));
+//    }
+//    else{
+//    	//Log.e("FAIL", col);
+//    	view.setBackgroundColor(Color.rgb(255, 0, 0));
+//    }
   }
 
   private View inflateIfRequired(View view, int position, ViewGroup parent) {
@@ -179,18 +171,9 @@ public class LeDeviceListAdapter extends BaseAdapter {
       uuidTextView= (TextView) view.findViewWithTag("uuid");
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
+
   }
-  
-  
-  
+
 	public class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		protected String doInBackground(String... urls) {
 
