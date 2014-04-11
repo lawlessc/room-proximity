@@ -46,34 +46,32 @@ public class ListBeaconsActivity extends Activity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
-    getActionBar().setDisplayHomeAsUpEnabled(true);
+	  super.onCreate(savedInstanceState);
+	  setContentView(R.layout.main);
+	  getActionBar().setDisplayHomeAsUpEnabled(true);
 
-    // Configure device list.
-    adapter = new LeDeviceListAdapter(this);
-    ListView list = (ListView) findViewById(R.id.device_list);
-    list.setAdapter(adapter);
-    list.setOnItemClickListener(createOnItemClickListener());
+	  // Configure device list.
+	  adapter = new LeDeviceListAdapter(this);
+	  ListView list = (ListView) findViewById(R.id.device_list);
+	  list.setAdapter(adapter);
+	  list.setOnItemClickListener(createOnItemClickListener());
 
-    // Configure verbose debug logging.
-    L.enableDebugLogging(false);
+	  // Configure verbose debug logging.
+	  L.enableDebugLogging(false);
 
-    // Configure BeaconManager.
-    beaconManager = new BeaconManager(this);
-    try {
-		beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
-	 //   beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
-		System.out.println("STOP CALLED");
-	} catch (RemoteException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
- 
+	  // Configure BeaconManager.
+	  beaconManager = new BeaconManager(this);
+	  try {
+		  beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+		  //   beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
+		  System.out.println("STOP CALLED");
+	  } catch (RemoteException e) {
+		  // TODO Auto-generated catch block
+		  e.printStackTrace();
+	  }
+
   }
 
-  
-  
   public void scan(View view)
   {
 	  scanningTime=0;
@@ -104,130 +102,113 @@ public class ListBeaconsActivity extends Activity {
 			  });
 		  }
 	  });
-
-
-
   }
-  
-  
-  
+
   private List<Beacon> filterBeacons(List<Beacon> beacons) {
-    List<Beacon> filteredBeacons = new ArrayList<Beacon>(beacons.size());
-    for (Beacon beacon : beacons) {
-      if (beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_BEACON_PROXIMITY_UUID)
-          || beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_IOS_PROXIMITY_UUID)) {
-        filteredBeacons.add(beacon);
-      }
-    }
-    return filteredBeacons;
+	  List<Beacon> filteredBeacons = new ArrayList<Beacon>(beacons.size());
+	  for (Beacon beacon : beacons) {
+		  if (beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_BEACON_PROXIMITY_UUID)
+				  || beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_IOS_PROXIMITY_UUID)) {
+			  filteredBeacons.add(beacon);
+		  }
+	  }
+	  return filteredBeacons;
   }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.scan_menu, menu);
-    
-    // MenuItem refreshItem = menu.findItem(R.id.refresh);
-    // refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
-    return true;
+	  getMenuInflater().inflate(R.menu.scan_menu, menu);
+
+	  // MenuItem refreshItem = menu.findItem(R.id.refresh);
+	  // refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+	  return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      finish();
-      return true;
-    }
-    
-    
-   
-    
-    //if (item.getItemId() == android.R.id.) {
-    //    finish();
-     //   return true;
-    //  }
- 
-    
-    
-    
-    return super.onOptionsItemSelected(item);
+	  if (item.getItemId() == android.R.id.home) {
+		  finish();
+		  return true;
+	  }
+
+	  return super.onOptionsItemSelected(item);
   }
 
   @Override
   protected void onDestroy() {
-    beaconManager.disconnect();
+	  beaconManager.disconnect();
 
-    super.onDestroy();
+	  super.onDestroy();
   }
 
   @Override
   protected void onStart() {
-    super.onStart();
+	  super.onStart();
 
-    // Check if device supports Bluetooth Low Energy.
-    if (!beaconManager.hasBluetooth()) {
-      Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
-      return;
-    }
+	  // Check if device supports Bluetooth Low Energy.
+	  if (!beaconManager.hasBluetooth()) {
+		  Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
+		  return;
+	  }
 
-    // If Bluetooth is not enabled, let user enable it.
-    if (!beaconManager.isBluetoothEnabled()) {
-      Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-      startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-    } else {
-     // connectToService();
-    }
+	  // If Bluetooth is not enabled, let user enable it.
+	  if (!beaconManager.isBluetoothEnabled()) {
+		  Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		  startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+	  } else {
+		  // connectToService();
+	  }
   }
 
   @Override
   protected void onStop() {
-    try {
-      beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
-    } catch (RemoteException e) {
-      Log.d(TAG, "Error while stopping ranging", e);
-    }
+	  try {
+		  beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+	  } catch (RemoteException e) {
+		  Log.d(TAG, "Error while stopping ranging", e);
+	  }
 
-    super.onStop();
+	  super.onStop();
   }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == REQUEST_ENABLE_BT) {
-      if (resultCode == Activity.RESULT_OK) {
-        connectToService();
-      } else {
-        Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_LONG).show();
-        getActionBar().setSubtitle("Bluetooth not enabled");
-      }
-    }
-    super.onActivityResult(requestCode, resultCode, data);
+	  if (requestCode == REQUEST_ENABLE_BT) {
+		  if (resultCode == Activity.RESULT_OK) {
+			  connectToService();
+		  } else {
+			  Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_LONG).show();
+			  getActionBar().setSubtitle("Bluetooth not enabled");
+		  }
+	  }
+	  super.onActivityResult(requestCode, resultCode, data);
   }
 
   private void connectToService() {
-    getActionBar().setSubtitle("Scanning...");
-    adapter.replaceWith(Collections.<Beacon>emptyList());
-    beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-      @Override
-      public void onServiceReady() {
-        try {
-          beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
-        } catch (RemoteException e) {
-          Toast.makeText(ListBeaconsActivity.this, "Cannot start ranging, something terrible happened",
-              Toast.LENGTH_LONG).show();
-          Log.e(TAG, "Cannot start ranging", e);
-        }
-      }
-    });
+	  getActionBar().setSubtitle("Scanning...");
+	  adapter.replaceWith(Collections.<Beacon>emptyList());
+	  beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+		  @Override
+		  public void onServiceReady() {
+			  try {
+				  beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
+			  } catch (RemoteException e) {
+				  Toast.makeText(ListBeaconsActivity.this, "Cannot start ranging, something terrible happened",
+						  Toast.LENGTH_LONG).show();
+				  Log.e(TAG, "Cannot start ranging", e);
+			  }
+		  }
+	  });
   }
 
   private AdapterView.OnItemClickListener createOnItemClickListener() {
-    return new AdapterView.OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
-		intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
-		startActivity(intent);
-      }
-    };
+	  return new AdapterView.OnItemClickListener() {
+		  @Override
+		  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			  Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
+			  intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+			  startActivity(intent);
+		  }
+	  };
   }
-
 }
