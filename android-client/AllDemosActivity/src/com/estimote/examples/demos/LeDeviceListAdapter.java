@@ -84,75 +84,79 @@ public class LeDeviceListAdapter extends BaseAdapter {
   }
 
   private void bind(Beacon beacon, View view) {
-    ViewHolder holder = (ViewHolder) view.getTag();
-<<<<<<< HEAD
-    //holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
-    //holder.majorTextView.setText("Major: " + beacon.getMajor());
-    //holder.minorTextView.setText("Minor: " + beacon.getMinor());
-    //holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-    //holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
-    //holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
-    
-    
-    //beacon. 
-    //beacon.get 
-    //  beacon.g
-=======
-    holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
-    holder.majorTextView.setText("Major: " + beacon.getMajor());
-    holder.minorTextView.setText("Minor: " + beacon.getMinor());
-    holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-    holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
-    holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
->>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
-    
-    major = beacon.getMajor();
-    minor = beacon.getMinor();
-    String colour ="";
-<<<<<<< HEAD
-    String room ="";
-    
-    
+	 // ViewHolder holder = (ViewHolder) view.getTag();
+	  
+	  ViewHolder holder = (ViewHolder) view.getTag();
+//	  holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
+//	  holder.majorTextView.setText("Major: " + beacon.getMajor());
+//	  holder.minorTextView.setText("Minor: " + beacon.getMinor());
+//	  holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
+//	  holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
+//	  holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
 
-    
-    
-    //System.out.println("about to try");
-    try {
-		String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
-		JSONObject json = new JSONObject(beaconData);
-		
-		 colour =  json.getString("colour");
-		 room =  json.getString("room");
-		
-	
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ExecutionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    
-    holder.roomNameView.setText(room);
+	  major = beacon.getMajor();
+	  minor = beacon.getMinor();
+	  String colour ="";
+	  String room ="";
+
+//	  try {
+//		  String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
+//		  JSONObject json = new JSONObject(beaconData);
+//
+//		  colour =  json.getString("colour");
+//		  room =  json.getString("room");
+//
+//
+//	  } catch (InterruptedException e) {
+//		  // TODO Auto-generated catch block
+//		  e.printStackTrace();
+//	  } catch (ExecutionException e) {
+//		  // TODO Auto-generated catch block
+//		  e.printStackTrace();
+//	  } catch (JSONException e) {
+//		  // TODO Auto-generated catch block
+//		  e.printStackTrace();
+//	  }
+
+//    holder.roomNameView.setText(room);
     
     //System.out.println("COLOUR IS ---------------"+colour+"-----------------------");
     //this shouldn't be hardcoded, we need to get this from the server!
-    if(colour.equalsIgnoreCase("blue"))
+//    if(colour.equalsIgnoreCase("blue"))
+//    {
+//    view.setBackgroundColor(Color.rgb(173, 216, 230));
+//    holder.roomNameView.setTextColor(Color.WHITE);
+//    }
+//    else if(colour.equalsIgnoreCase("green"))
+//    {
+//    view.setBackgroundColor(Color.rgb(60, 179, 113));
+//    holder.roomNameView.setTextColor(Color.WHITE);
+//    }
+//    else if(colour.equalsIgnoreCase("navy"))
+//    {
+//    view.setBackgroundColor(Color.rgb(60, 60, 128));
+//    holder.roomNameView.setTextColor(Color.WHITE);
+//    }
+    
+    if(major == 666)
     {
     view.setBackgroundColor(Color.rgb(173, 216, 230));
+    room = "solas";
+    holder.roomNameView.setText(room);
     holder.roomNameView.setTextColor(Color.WHITE);
     }
-    else if(colour.equalsIgnoreCase("green"))
+    else if(major == 55149)
     {
     view.setBackgroundColor(Color.rgb(60, 179, 113));
+    room = "nova";
+    holder.roomNameView.setText(room);
     holder.roomNameView.setTextColor(Color.WHITE);
     }
-    else if(colour.equalsIgnoreCase("navy"))
+    else if(major == 49567)
     {
     view.setBackgroundColor(Color.rgb(60, 60, 128));
+    room = "scotia";
+    holder.roomNameView.setText(room);
     holder.roomNameView.setTextColor(Color.WHITE);
     }
     
@@ -162,44 +166,12 @@ public class LeDeviceListAdapter extends BaseAdapter {
     ///two calls per beacon, probably a better way to do this
     String availability= "";
  
-    try {
-		String roomData = new HttpAsyncTask().execute("http://localhost:8888/room"+ "/" + room).get();
-		JSONObject json = new JSONObject(roomData);
-		availability =  json.getString("available");
-		 //room =  json.getString("room");
-		
-	
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ExecutionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    System.out.println("IS AVAILABLE?"+availability);
-    if(availability.equalsIgnoreCase("occupied")  )
-    {
-    	holder.availabilityImage.setImageResource(R.drawable.red_dot);
-    	//System.out.printl
-    }
-    else
-    {
-    	
-    	holder.availabilityImage.setImageResource(R.drawable.green_dot);
-    }
-    
-    
-    
-=======
-//    //System.out.println("about to try");
-//    
 //    try {
-//		String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
-//		JSONObject json = new JSONObject(beaconData);
-//		colour =  json.getString("colour");
+//		String roomData = new HttpAsyncTask().execute("http://localhost:8888/room"+ "/" + room).get();
+//		JSONObject json = new JSONObject(roomData);
+//		availability =  json.getString("available");
+//		 //room =  json.getString("room");
+//		
 //	
 //	} catch (InterruptedException e) {
 //		// TODO Auto-generated catch block
@@ -211,40 +183,18 @@ public class LeDeviceListAdapter extends BaseAdapter {
 //		// TODO Auto-generated catch block
 //		e.printStackTrace();
 //	}
-//    
-//    
-//    //System.out.println("COLOUR IS ---------------"+colour+"-----------------------");
-//    //this shouldn't be hardcoded, we need to get this from the server!
+//    System.out.println("IS AVAILABLE?"+availability);
+//    if(availability.equalsIgnoreCase("occupied")  )
+//    {
+//    	holder.availabilityImage.setImageResource(R.drawable.red_dot);
+//    	//System.out.printl
+//    }
+//    else
+//    {
+//    	
+//    	holder.availabilityImage.setImageResource(R.drawable.green_dot);
+//    }
     
-    if(major == 24723){
-    	view.setBackgroundColor(Color.rgb(173, 216, 230));
-    }
-    else if(major == 55149){
-    	view.setBackgroundColor(Color.rgb(60, 179, 113));
-    }
-    else if(major == 666){
-    	view.setBackgroundColor(Color.rgb(0, 0, 128));
-    }
-    else{
-    	//Log.e("FAIL", col);
-    	view.setBackgroundColor(Color.rgb(255, 0, 0));
-    }
-    
-    
-//    if(colour.equalsIgnoreCase("blue")){
-//    	view.setBackgroundColor(Color.rgb(173, 216, 230));
-//    }
-//    else if(colour.equalsIgnoreCase("green")){
-//    	view.setBackgroundColor(Color.rgb(60, 179, 113));
-//    }
-//    else if(colour.equalsIgnoreCase("navy")){
-//    	view.setBackgroundColor(Color.rgb(0, 0, 128));
-//    }
-//    else{
-//    	//Log.e("FAIL", col);
-//    	view.setBackgroundColor(Color.rgb(255, 0, 0));
-//    }
->>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
   }
 
   private View inflateIfRequired(View view, int position, ViewGroup parent) {
@@ -256,62 +206,58 @@ public class LeDeviceListAdapter extends BaseAdapter {
   }
 
   static class ViewHolder {
-  //  final TextView macTextView;
-  //  final TextView majorTextView;
-  //  final TextView minorTextView;
-  //  final TextView measuredPowerTextView;
-  //  final TextView rssiTextView;
-  //  final TextView uuidTextView;
+
+//	  final TextView macTextView;
+//	  final TextView majorTextView;
+//	  final TextView minorTextView;
+//	  final TextView measuredPowerTextView;
+//	  final TextView rssiTextView;
+//	  final TextView uuidTextView;
+//	  //  final TextView roomNameView;
+//	  final ImageView availabilityImage;
+
+//	  ViewHolder(View view) {
+//		  macTextView = (TextView) view.findViewWithTag("mac");
+//		  majorTextView = (TextView) view.findViewWithTag("major");
+//		  minorTextView = (TextView) view.findViewWithTag("minor");
+//		  measuredPowerTextView = (TextView) view.findViewWithTag("mpower");
+//		  rssiTextView = (TextView) view.findViewWithTag("rssi");
+//		  uuidTextView= (TextView) view.findViewWithTag("uuid");
+//		  availabilityImage = (ImageView) view.findViewWithTag("availability");
+//	  }
+
 	  final TextView roomNameView;
 	  final ImageView availabilityImage;
 
-    ViewHolder(View view) {
-   //   macTextView = (TextView) view.findViewWithTag("mac");
-   //   majorTextView = (TextView) view.findViewWithTag("major");
-   //   minorTextView = (TextView) view.findViewWithTag("minor");
-   //   measuredPowerTextView = (TextView) view.findViewWithTag("mpower");
-   //   rssiTextView = (TextView) view.findViewWithTag("rssi");
-   //   uuidTextView= (TextView) view.findViewWithTag("uuid");
-    	availabilityImage = (ImageView) view.findViewWithTag("availability");
-    	roomNameView= (TextView) view.findViewWithTag("room");
-    	
-    	
-    	
-    }
-    
-<<<<<<< HEAD
-  }
-  
-=======
-
+	  ViewHolder(View view) {
+		  availabilityImage = (ImageView) view.findViewWithTag("availability");
+		  roomNameView= (TextView) view.findViewWithTag("room");
+		  }
   }
 
->>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
-	public class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		protected String doInBackground(String... urls) {
+  public class HttpAsyncTask extends AsyncTask<String, Void, String> {
+	  protected String doInBackground(String... urls) {
 
-			return GET(urls[0], major, minor);
-		}
-		// onPostExecute displays the results of the AsyncTask.
-		@Override
-		protected void onPostExecute(String result) {
-			if(result != null){
-			//	Toast.makeText(getBaseContext(), "Connected!", Toast.LENGTH_LONG).show();
-			}
-		
-			if (result == null) {
-				Log.d("beacons", "No the result was null");
-			}
-			else{
-//				Log.d("beacons", result);
-			}
-			
-			//etResponse.setText(result);
-		}
-	}
-	
-	
+		  return GET(urls[0], major, minor);
+	  }
+	  // onPostExecute displays the results of the AsyncTask.
+	  @Override
+	  protected void onPostExecute(String result) {
+		  if(result != null){
+			  //	Toast.makeText(getBaseContext(), "Connected!", Toast.LENGTH_LONG).show();
+		  }
 
+		  if (result == null) {
+			  Log.d("beacons", "No the result was null");
+		  }
+		  else{
+			  //				Log.d("beacons", result);
+		  }
+
+		  //etResponse.setText(result);
+	  }
+  }
+	
 	public static String GET(String url, int major, int minor){
 		InputStream inputStream = null;
 		String result = "";
@@ -345,11 +291,5 @@ public class LeDeviceListAdapter extends BaseAdapter {
 		inputStream.close();
 		return result;
 	}
-  
-  
-  
-  
-  
-  
   
 }

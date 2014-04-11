@@ -9,11 +9,6 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
 public class TimePickerFragment extends DialogFragment implements OnTimeSetListener {
 	
 	private int mId;

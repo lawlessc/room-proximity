@@ -150,9 +150,11 @@ app.post('/rooms/:room/booking', function(req, res) {
   // var room = 'solas';
   var uri = "/here/who/is/where";
   var date = req.body.date;
+  console.log("the date is" + date);
   var startTime = req.body.startTime;
   var endTime = req.body.endTime;
   var meetingName = req.body.meetingName;
+  console.log("the meeting name  is" + meetingName);
   // var users = req.body.users;
   var users = "appUser";
 

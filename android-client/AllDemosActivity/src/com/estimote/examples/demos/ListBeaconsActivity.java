@@ -56,7 +56,6 @@ public class ListBeaconsActivity extends Activity {
 
     // Configure verbose debug logging.
     L.enableDebugLogging(true);
-
     // Configure BeaconManager.
     beaconManager = new BeaconManager(this);
     beaconManager.setRangingListener(new BeaconManager.RangingListener() {
@@ -69,7 +68,8 @@ public class ListBeaconsActivity extends Activity {
             // Note that beacons reported here are already sorted by estimated
             // distance between device and beacon.
             List<Beacon> estimoteBeacons = filterBeacons(beacons);
-            getActionBar().setSubtitle("Found beacons: " + estimoteBeacons.size());
+//        	List<Beacon> estimoteBeacons = beacons;
+            getActionBar().setSubtitle("Found rooms: " + estimoteBeacons.size());
             adapter.replaceWith(estimoteBeacons);
           }
         });
@@ -146,7 +146,7 @@ public class ListBeaconsActivity extends Activity {
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == REQUEST_ENABLE_BT) {
       if (resultCode == Activity.RESULT_OK) {
-        connectToService();
+       // connectToService();
       } else {
         Toast.makeText(this, "Bluetooth not enabled", Toast.LENGTH_LONG).show();
         getActionBar().setSubtitle("Bluetooth not enabled");
@@ -177,16 +177,8 @@ public class ListBeaconsActivity extends Activity {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
-<<<<<<< HEAD
-		//intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
-		
-		//Intent intent = new Intent(ListBeaconsActivity.this, clazz);
 		intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
 		startActivity(intent);
-=======
-        intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
-        startActivity(intent); 
->>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
       }
     };
   }

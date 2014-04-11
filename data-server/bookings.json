@@ -6,13 +6,8 @@
                 {
                     "URI": "solas/booking1",
                     "date": "7/4/14",
-<<<<<<< HEAD
-                    "StartT": "1600",
-                    "EndT": "1730",
-=======
                     "StartT": "09:00",
                     "EndT": "10:00",
->>>>>>> 273f354a0668a13fbc1b3174e5646d9826bddd48
                     "MeetingName": "CTO Planning",
                     "Users": "David Bowman"
                 },
@@ -23,6 +18,34 @@
                     "EndT": "12:00",
                     "MeetingName": "CATE Update",
                     "Users": "Hank Hill"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "10/3/2014",
+                    "StartT": "15:0",
+                    "EndT": "16:0",
+                    "MeetingName": "Test",
+                    "Users": "testUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "10/3/2014",
+                    "StartT": "14:38",
+                    "EndT": "15:41",
+                    "MeetingName": "Test ",
+                    "Users": "testUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "Users": "appUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "11/3/2014",
+                    "StartT": "4:21",
+                    "EndT": "5:21",
+                    "MeetingName": "Gggg",
+                    "Users": "appUser"
                 }
             ]
         },
@@ -60,6 +83,22 @@
                     "EndT": "15:12",
                     "MeetingName": "Meat ",
                     "Users": "appUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "10/3/2014",
+                    "StartT": "14:49",
+                    "EndT": "20:57",
+                    "MeetingName": "Hhgg",
+                    "Users": "testUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "10/3/2014",
+                    "StartT": "15:7",
+                    "EndT": "15:21",
+                    "MeetingName": "I ",
+                    "Users": "testUser"
                 }
             ]
         },
@@ -81,6 +120,14 @@
                     "EndT": "13:00",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Hank Hill"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "11/04/14",
+                    "StartT": "15:12",
+                    "EndT": "16:12",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
                 }
             ]
         }
