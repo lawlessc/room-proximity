@@ -41,6 +41,8 @@ public class ListBeaconsActivity extends Activity {
 
   private BeaconManager beaconManager;
   private LeDeviceListAdapter adapter;
+  private int scanningTime =0;
+  
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +57,25 @@ public class ListBeaconsActivity extends Activity {
     list.setOnItemClickListener(createOnItemClickListener());
 
     // Configure verbose debug logging.
-    L.enableDebugLogging(true);
+    L.enableDebugLogging(false);
 
     // Configure BeaconManager.
     beaconManager = new BeaconManager(this);
-    beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+    //beaconManager.
+   // beaconManager.
+    try {
+		beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+	 //   beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
+		System.out.println("STOP CALLED");
+	} catch (RemoteException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+ 
+    
+    
+   /// beaconManager.s
+  /*  beaconManager.setRangingListener(new BeaconManager.RangingListener() {
       @Override
       public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
         // Note that results are not delivered on UI thread.
@@ -74,9 +90,68 @@ public class ListBeaconsActivity extends Activity {
           }
         });
       }
-    });
+    });*/
   }
 
+  
+  
+  public void scan(View view)
+  {
+	  scanningTime=0;
+	  connectToService();
+	  beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+		  	
+	  
+	      @Override
+	      public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
+	    	  
+	        // Note that results are not delivered on UI thread.
+	        runOnUiThread(new Runnable() {
+	          @Override
+	          public void run() {
+	        	 scanningTime +=1;
+	        	// System.out.println("SCANNING TIME ================="+scanningTime);
+	            // Note that beacons reported here are already sorted by estimated
+	            // distance between device and beacon.
+	            List<Beacon> estimoteBeacons = filterBeacons(beacons);
+	            getActionBar().setSubtitle("Found beacons: " + estimoteBeacons.size());
+	            adapter.replaceWith(estimoteBeacons);
+	           
+	            
+	            if(scanningTime >0)
+	            {
+	            	
+	            		try {
+							beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+						 //   beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
+							System.out.println("STOP CALLED");
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					
+	            }
+	           
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	          }
+	        });
+	      }
+	    });
+	  
+	  
+	  
+  }
+  
+  
+  
   private List<Beacon> filterBeacons(List<Beacon> beacons) {
     List<Beacon> filteredBeacons = new ArrayList<Beacon>(beacons.size());
     for (Beacon beacon : beacons) {
@@ -91,8 +166,9 @@ public class ListBeaconsActivity extends Activity {
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.scan_menu, menu);
-    MenuItem refreshItem = menu.findItem(R.id.refresh);
-    refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+    
+    // MenuItem refreshItem = menu.findItem(R.id.refresh);
+    // refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
     return true;
   }
 
@@ -102,6 +178,18 @@ public class ListBeaconsActivity extends Activity {
       finish();
       return true;
     }
+    
+    
+   
+    
+    //if (item.getItemId() == android.R.id.) {
+    //    finish();
+     //   return true;
+    //  }
+ 
+    
+    
+    
     return super.onOptionsItemSelected(item);
   }
 
@@ -127,7 +215,7 @@ public class ListBeaconsActivity extends Activity {
       Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
       startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
     } else {
-      connectToService();
+     // connectToService();
     }
   }
 

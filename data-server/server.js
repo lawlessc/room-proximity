@@ -282,10 +282,19 @@ function getCurrentAvailability(bookings){
 	//var bookingsJson = JSON.parse(bookings);
 	var currentDate = new Date();
 	var currentHour = currentDate.getHours();
-	console.log(currentHour);
+	console.log("CURRENT HOUR" + currentHour);
   var available = "available";
   for (var i = 0; i< bookings['bookings'].length; i++) {
-      if (currentHour == bookings['bookings'][i].StartT){
+       var Shr  = new Date(currentHour >= bookings['bookings'][i].StartT);
+      var Ehr  = new Date(currentHour >= bookings['bookings'][i].EndT);
+      
+      Shr = Shr.getMinutes();
+      Ehr = Shr.getMinutes();
+
+      console.log("start mins" + Shr);
+      console.log("end mins" + Ehr);
+
+      if (currentHour >= bookings['bookings'][i].StartT   && currentHour <= bookings['bookings'][i].EndT){
 		  available = "occupied";
       }
   } 
