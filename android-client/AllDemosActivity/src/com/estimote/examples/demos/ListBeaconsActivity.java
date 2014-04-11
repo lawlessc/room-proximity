@@ -61,8 +61,6 @@ public class ListBeaconsActivity extends Activity {
 
     // Configure BeaconManager.
     beaconManager = new BeaconManager(this);
-    //beaconManager.
-   // beaconManager.
     try {
 		beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
 	 //   beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
@@ -72,25 +70,6 @@ public class ListBeaconsActivity extends Activity {
 		e.printStackTrace();
 	}
  
-    
-    
-   /// beaconManager.s
-  /*  beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-      @Override
-      public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
-        // Note that results are not delivered on UI thread.
-        runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            // Note that beacons reported here are already sorted by estimated
-            // distance between device and beacon.
-            List<Beacon> estimoteBeacons = filterBeacons(beacons);
-            getActionBar().setSubtitle("Found beacons: " + estimoteBeacons.size());
-            adapter.replaceWith(estimoteBeacons);
-          }
-        });
-      }
-    });*/
   }
 
   
@@ -100,54 +79,34 @@ public class ListBeaconsActivity extends Activity {
 	  scanningTime=0;
 	  connectToService();
 	  beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-		  	
-	  
-	      @Override
-	      public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {
-	    	  
-	        // Note that results are not delivered on UI thread.
-	        runOnUiThread(new Runnable() {
-	          @Override
-	          public void run() {
-	        	 scanningTime +=1;
-	        	// System.out.println("SCANNING TIME ================="+scanningTime);
-	            // Note that beacons reported here are already sorted by estimated
-	            // distance between device and beacon.
-	            List<Beacon> estimoteBeacons = filterBeacons(beacons);
-	            getActionBar().setSubtitle("Found beacons: " + estimoteBeacons.size());
-	            adapter.replaceWith(estimoteBeacons);
-	           
-	            
-	            if(scanningTime >0)
-	            {
-	            	
-	            		try {
-							beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
-						 //   beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
-							System.out.println("STOP CALLED");
-						} catch (RemoteException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-					
-	            }
-	           
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	          }
-	        });
-	      }
-	    });
-	  
-	  
-	  
+
+		  @Override
+		  public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {  
+			  // Note that results are not delivered on UI thread.
+			  runOnUiThread(new Runnable() {
+				  @Override
+				  public void run() {
+					  scanningTime +=1;
+					  List<Beacon> estimoteBeacons = filterBeacons(beacons);
+					  getActionBar().setSubtitle("Found beacons: " + estimoteBeacons.size());
+					  adapter.replaceWith(estimoteBeacons);
+					  if(scanningTime >0) {
+						  try {
+							  beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+							  //   beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
+
+						  } catch (RemoteException e) {
+							  // TODO Auto-generated catch block
+							  e.printStackTrace();
+						  }
+					  }
+				  }
+			  });
+		  }
+	  });
+
+
+
   }
   
   
@@ -265,9 +224,6 @@ public class ListBeaconsActivity extends Activity {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
-		//intent.putExtra(ListBeaconsActivity.EXTRAS_TARGET_ACTIVITY, BookingActivity.class.getName());
-		
-		//Intent intent = new Intent(ListBeaconsActivity.this, clazz);
 		intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
 		startActivity(intent);
       }

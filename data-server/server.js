@@ -51,17 +51,13 @@ app.param('minor', /^\d+$/);
 app.get('/:major/:minor', function(req,res,next){
   var major = req.params.major;
   var minor = req.params.minor;
-  // console.log('major is' + major);
-  // console.log('minor is' + minor);
   var beacons = getJson('beacons.json');
  
  //checks if major and minor are part of the url + redirects
   for(var i=0; i<beacons['beacons'].length; i++){
     if (major == beacons['beacons'][i].major && minor == beacons['beacons'][i].minor){
-    // if (major == beacons['beacons'][i].major){
       if(!req.secure){
-        //res.redirect(301, beacons['beacons'][i].uri);
-		res.json(beacons['beacons'][i]);
+        res.json(beacons['beacons'][i]);
       }
     }
   }
@@ -154,10 +150,13 @@ app.post('/rooms/:room/booking', function(req, res) {
   // var room = 'solas';
   var uri = "/here/who/is/where";
   var date = req.body.date;
+  console.log("the date is" + date);
   var startTime = req.body.startTime;
   var endTime = req.body.endTime;
   var meetingName = req.body.meetingName;
-  var users = req.body.users;
+  console.log("the meeting name  is" + meetingName);
+  // var users = req.body.users;
+  var users = "appUser";
 
   var jBookings = getJson('bookings.json');
   

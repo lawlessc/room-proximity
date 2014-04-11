@@ -21,44 +21,24 @@
   <application
       android:label="Estimote Demos"
       android:theme="@android:style/Theme.Holo.Light">
-
-    <activity
-        android:name="com.estimote.examples.demos.AllDemosActivity"
-        android:label="Estimote Demos"
-        android:screenOrientation="portrait">
-    
-    </activity>
  
     <activity
         android:name="com.estimote.examples.demos.ListBeaconsActivity"
-        android:label="iBeacons"
+        android:label="Occupy"
         android:screenOrientation="portrait">
-          <intent-filter>
+       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>
-    <activity
-        android:name="com.estimote.examples.demos.DistanceBeaconActivity"
-        android:label="Distance Demo"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.estimote.examples.demos.NotifyDemoActivity"
-        android:label="Notify Demo"
-        android:screenOrientation="portrait" />
-    <activity
-        android:name="com.estimote.examples.demos.CharacteristicsDemoActivity"
-        android:label="Characteristics Demo"
-        android:screenOrientation="portrait" />
-     
+    </activity>     
     <activity
         android:name="com.estimote.examples.demos.BookingActivity"
-        android:label="Room Information"
+        android:label="Occupy"
         android:screenOrientation="portrait" />
     
  <activity
         android:name="com.estimote.examples.demos.PostBookingActivity"
-        android:label="Book a Room"
+        android:label="Occupy"
         android:screenOrientation="portrait" />
 
     <!-- Estimote service responsible for scanning beacons. -->
