@@ -16,7 +16,7 @@ public class TimePickerFragment extends DialogFragment implements OnTimeSetListe
 	private int mId;
     private TimePickerDialogListener mListener;
 
-     public static TimePickerFragment newInstance(int id) {
+    public static TimePickerFragment newInstance(int id) {
         Bundle args = new Bundle();
         args.putInt("picker_id", id);
         TimePickerFragment fragment = new TimePickerFragment();
@@ -47,7 +47,5 @@ public class TimePickerFragment extends DialogFragment implements OnTimeSetListe
 	    public static interface TimePickerDialogListener {
 	        public void onTimeSet(int id, TimePicker view, int hourOfDay, int minute);
 	    }
-
-
 }
 

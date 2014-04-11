@@ -85,26 +85,11 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
   private void bind(Beacon beacon, View view) {
     ViewHolder holder = (ViewHolder) view.getTag();
-    //holder.macTextView.setText(String.format("MAC: %s (%.2fm)", beacon.getMacAddress(), Utils.computeAccuracy(beacon)));
-    //holder.majorTextView.setText("Major: " + beacon.getMajor());
-    //holder.minorTextView.setText("Minor: " + beacon.getMinor());
-    //holder.measuredPowerTextView.setText("MPower: " + beacon.getMeasuredPower());
-    //holder.rssiTextView.setText("RSSI: " + beacon.getRssi());
-    //holder.uuidTextView.setText("UUID: " + beacon.getProximityUUID());
-    
-    
-    //beacon. 
-    //beacon.get 
-    //  beacon.g
-    
+   
     major = beacon.getMajor();
     minor = beacon.getMinor();
     String colour ="";
     String room ="";
-    
-    
-
-    
     
     //System.out.println("about to try");
     try {
@@ -114,7 +99,6 @@ public class LeDeviceListAdapter extends BaseAdapter {
 		 colour =  json.getString("colour");
 		 room =  json.getString("room");
 		
-	
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -127,9 +111,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
 	}
     
     holder.roomNameView.setText(room);
-    
-    //System.out.println("COLOUR IS ---------------"+colour+"-----------------------");
-    //this shouldn't be hardcoded, we need to get this from the server!
+
     if(colour.equalsIgnoreCase("blue"))
     {
     view.setBackgroundColor(Color.rgb(173, 216, 230));
@@ -145,20 +127,16 @@ public class LeDeviceListAdapter extends BaseAdapter {
     view.setBackgroundColor(Color.rgb(60, 60, 128));
     holder.roomNameView.setTextColor(Color.WHITE);
     }
-    
-    
-    
-    
+       
     ///two calls per beacon, probably a better way to do this
     String availability= "";
  
     try {
-		String roomData = new HttpAsyncTask().execute("http://localhost:8888/room"+ "/" + room).get();
+		String roomData = new HttpAsyncTask().execute("http://localhost:8888/rooms"+ "/" + room).get();
+		//System.out.println("ROOM DATA"+availability);
 		JSONObject json = new JSONObject(roomData);
 		availability =  json.getString("available");
-		 //room =  json.getString("room");
-		
-	
+
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -169,19 +147,15 @@ public class LeDeviceListAdapter extends BaseAdapter {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    System.out.println("IS AVAILABLE?"+availability);
+   // System.out.println("IS AVAILABLE?"+availability);
     if(availability.equalsIgnoreCase("occupied")  )
     {
     	holder.availabilityImage.setImageResource(R.drawable.red_dot);
-    	//System.out.printl
     }
     else
-    {
-    	
+    {    	
     	holder.availabilityImage.setImageResource(R.drawable.green_dot);
-    }
-    
-    
+    } 
     
   }
 
@@ -194,31 +168,19 @@ public class LeDeviceListAdapter extends BaseAdapter {
   }
 
   static class ViewHolder {
-  //  final TextView macTextView;
-  //  final TextView majorTextView;
-  //  final TextView minorTextView;
-  //  final TextView measuredPowerTextView;
-  //  final TextView rssiTextView;
-  //  final TextView uuidTextView;
+
 	  final TextView roomNameView;
 	  final ImageView availabilityImage;
 
     ViewHolder(View view) {
-   //   macTextView = (TextView) view.findViewWithTag("mac");
-   //   majorTextView = (TextView) view.findViewWithTag("major");
-   //   minorTextView = (TextView) view.findViewWithTag("minor");
-   //   measuredPowerTextView = (TextView) view.findViewWithTag("mpower");
-   //   rssiTextView = (TextView) view.findViewWithTag("rssi");
-   //   uuidTextView= (TextView) view.findViewWithTag("uuid");
+
     	availabilityImage = (ImageView) view.findViewWithTag("availability");
     	roomNameView= (TextView) view.findViewWithTag("room");
     	
-    	
-    	
     }
-    
+   
   }
-  
+
 	public class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		protected String doInBackground(String... urls) {
 
@@ -242,8 +204,6 @@ public class LeDeviceListAdapter extends BaseAdapter {
 		}
 	}
 	
-	
-
 	public static String GET(String url, int major, int minor){
 		InputStream inputStream = null;
 		String result = "";
@@ -277,11 +237,5 @@ public class LeDeviceListAdapter extends BaseAdapter {
 		inputStream.close();
 		return result;
 	}
-  
-  
-  
-  
-  
-  
   
 }
