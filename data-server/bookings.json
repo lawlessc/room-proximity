@@ -1,7 +1,7 @@
 {
     "rooms": [
         {
-            "roomname": "solas",
+            "roomname": "Solas",
             "bookings": [
                 {
                     "URI": "solas/booking1",
@@ -22,35 +22,39 @@
                 {
                     "URI": "/here/who/is/where",
                     "date": "10/3/2014",
-                    "StartT": "15:0",
-                    "EndT": "16:0",
+                    "StartT": "13:00",
+                    "EndT": "14:00",
                     "MeetingName": "Test",
                     "Users": "testUser"
                 },
                 {
                     "URI": "/here/who/is/where",
-                    "date": "10/3/2014",
-                    "StartT": "14:38",
-                    "EndT": "15:41",
-                    "MeetingName": "Test ",
-                    "Users": "testUser"
-                },
-                {
-                    "URI": "/here/who/is/where",
+                    "date": "15/04/14",
+                    "StartT": "16:07",
+                    "EndT": "17:07",
+                    "MeetingName": "testUser's Meeting",
                     "Users": "appUser"
                 },
                 {
                     "URI": "/here/who/is/where",
-                    "date": "11/3/2014",
-                    "StartT": "4:21",
-                    "EndT": "5:21",
-                    "MeetingName": "Gggg",
+                    "date": "15/04/14",
+                    "StartT": "18:02",
+                    "EndT": "19:02",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "15/04/14",
+                    "StartT": "18:21",
+                    "EndT": "19:21",
+                    "MeetingName": "testUser's Meeting",
                     "Users": "appUser"
                 }
             ]
         },
         {
-            "roomname": "nova",
+            "roomname": "Nova",
             "bookings": [
                 {
                     "URI": "nova/booking1",
@@ -71,39 +75,31 @@
                 {
                     "URI": "nova/booking3",
                     "date": "7/4/14",
-                    "StartT": "15:00",
-                    "EndT": "16:00",
+                    "StartT": "16:00",
+                    "EndT": "17:00",
                     "MeetingName": "Team Meeting",
                     "Users": "Hank Hill"
                 },
                 {
                     "URI": "/here/who/is/where",
-                    "date": "9/3/2014",
-                    "StartT": "15:12",
-                    "EndT": "15:12",
-                    "MeetingName": "Meat ",
+                    "date": "15/04/14",
+                    "StartT": "16:35",
+                    "EndT": "17:35",
+                    "MeetingName": "testUser's Meeting",
                     "Users": "appUser"
                 },
                 {
                     "URI": "/here/who/is/where",
-                    "date": "10/3/2014",
-                    "StartT": "14:49",
-                    "EndT": "20:57",
-                    "MeetingName": "Hhgg",
-                    "Users": "testUser"
-                },
-                {
-                    "URI": "/here/who/is/where",
-                    "date": "10/3/2014",
-                    "StartT": "15:7",
-                    "EndT": "15:21",
-                    "MeetingName": "I ",
-                    "Users": "testUser"
+                    "date": "16/04/14",
+                    "StartT": "11:41",
+                    "EndT": "12:41",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
                 }
             ]
         },
         {
-            "roomname": "scotia",
+            "roomname": "Scotia",
             "bookings": [
                 {
                     "URI": "scotia/booking1",
@@ -123,9 +119,17 @@
                 },
                 {
                     "URI": "/here/who/is/where",
-                    "date": "11/04/14",
-                    "StartT": "15:12",
-                    "EndT": "16:12",
+                    "date": "14/04/14",
+                    "StartT": "16:56",
+                    "EndT": "17:56",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "15/04/14",
+                    "StartT": "16:20",
+                    "EndT": "17:20",
                     "MeetingName": "testUser's Meeting",
                     "Users": "appUser"
                 }

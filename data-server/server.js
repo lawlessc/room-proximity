@@ -48,29 +48,27 @@ app.param('major', /^\d+$/);
 app.param('minor', /^\d+$/);
 
 //redirect each URL
-app.get('/:major/:minor', function(req,res,next){
-  var major = req.params.major;
-  var minor = req.params.minor;
-  var beacons = getJson('beacons.json');
+// app.get('/:major/:minor', function(req,res,next){
+  // var major = req.params.major;
+  // var minor = req.params.minor;
+  // var beacons = getJson('beacons.json');
  
- //checks if major and minor are part of the url + redirects
-  for(var i=0; i<beacons['beacons'].length; i++){
-    if (major == beacons['beacons'][i].major && minor == beacons['beacons'][i].minor){
-      if(!req.secure){
-        res.json(beacons['beacons'][i]);
-      }
-    }
-  }
+ // //checks if major and minor are part of the url + redirects
+  // for(var i=0; i<beacons['beacons'].length; i++){
+    // if (major == beacons['beacons'][i].major && minor == beacons['beacons'][i].minor){
+      // if(!req.secure){
+        // res.json(beacons['beacons'][i]);
+      // }
+    // }
+  // }
   
-  next()
+  // next()
   
-});
+// });
 
 app.get('/:major/:minor/redirect', function(req,res,next){
   var major = req.params.major;
   var minor = req.params.minor;
-  // console.log('major is' + major);
-  // console.log('minor is' + minor);
   var beacons = getJson('beacons.json');
  
  //checks if major and minor are part of the url + redirects
@@ -150,11 +148,9 @@ app.post('/rooms/:room/booking', function(req, res) {
   // var room = 'solas';
   var uri = "/here/who/is/where";
   var date = req.body.date;
-  console.log("the date is" + date);
   var startTime = req.body.startTime;
   var endTime = req.body.endTime;
   var meetingName = req.body.meetingName;
-  console.log("the meeting name  is" + meetingName);
   // var users = req.body.users;
   var users = "appUser";
 
@@ -189,8 +185,8 @@ app.get('/rooms/:room/booking/:date', function(req, res){
 	var room = req.params.room;
 	var date = req.params.date;
 	
-	console.log("room: " + room);
-	console.log("date: " + date);
+	// console.log("room: " + room);
+	// console.log("date: " + date);
 	
   var jBookings = getJson('bookings.json');
 	var strBookings;
@@ -228,6 +224,31 @@ app.get('/rooms/:room/booking', function(req, res){
     res.end();
 
 });
+
+app.get('/:major/:minor', function(req,res,next){
+  var major = req.params.major;
+  var minor = req.params.minor;
+  var beacons = getJson('beacons.json');
+ 
+ 
+ //checks if major and minor are part of the url + redirects
+  for(var i=0; i<beacons['beacons'].length; i++){
+    if (major == beacons['beacons'][i].major && minor == beacons['beacons'][i].minor){
+    
+    var myroom = beacons['beacons'][i].room;
+    var bookings = getBooking(myroom);
+    var roomAvailability = getCurrentAvailability(bookings);
+    var beaconInfo = getBeacon(major,minor)
+    console.log(roomAvailability); 
+      res.json({beacon :beaconInfo , available: roomAvailability});
+        // res.json(beacons['beacons'][i]);
+    }
+  }
+  
+  next()
+  
+});
+
 
 //used for storing room information before db is set up
 app.get('/rooms/:room', function(req,res){
@@ -277,29 +298,28 @@ function getBooking(room){
 }
 
 function getCurrentAvailability(bookings){
-	console.log(bookings['bookings']);
-	//var bookingsJson = JSON.parse(bookings);
 	var currentDate = new Date();
 	var currentHour = currentDate.getHours();
-	console.log("CURRENT HOUR" + currentHour);
+  var currentMinute = currentDate.getMinutes();
+  var currentTime = (currentHour + ":" + currentMinute);
   var available = "available";
   for (var i = 0; i< bookings['bookings'].length; i++) {
-       var Shr  = new Date(currentHour >= bookings['bookings'][i].StartT);
-      var Ehr  = new Date(currentHour >= bookings['bookings'][i].EndT);
-      
-      Shr = Shr.getMinutes();
-      Ehr = Shr.getMinutes();
-
-      console.log("start mins" + Shr);
-      console.log("end mins" + Ehr);
-
-      if (currentHour >= bookings['bookings'][i].StartT   && currentHour <= bookings['bookings'][i].EndT){
-		  available = "occupied";
+      if (currentTime >= bookings['bookings'][i].StartT && currentTime <= bookings['bookings'][i].EndT){
+		  available = "occupied"; 
       }
   } 
   return available;
 }
 
+function getBeacon(major, minor){
+  var jBeacon = getJson('beacons.json');
+  for (var i = 0; i< jBeacon['beacons'].length; i++) {
+  if (major == jBeacon['beacons'][i].major && minor == jBeacon['beacons'][i].minor){
+        var strBeacon = jBeacon['beacons'][i];
+      }
+  } 
+  return strBeacon;
+}
 
 
 
