@@ -12,22 +12,18 @@ app.use(function(req, res, next){
   next();
 });
 
-//app.use(express.logger());
 
 //for POSTS
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 
-//start server
+
 var server = app.listen(8888, function() {
     //app.writeHead(200, {'Content-Type': 'text/plain'}); 
     console.log('Listening on port %d', server.address().port);
 });
 
-// app.use(function(req, res, next){
-  // res.send(404, 'Sorry cant find that!');
-// });
 
 app.param(function(name, fn){
   if (fn instanceof RegExp) {
@@ -47,24 +43,6 @@ app.param(function(name, fn){
 app.param('major', /^\d+$/);
 app.param('minor', /^\d+$/);
 
-//redirect each URL
-// app.get('/:major/:minor', function(req,res,next){
-  // var major = req.params.major;
-  // var minor = req.params.minor;
-  // var beacons = getJson('beacons.json');
- 
- // //checks if major and minor are part of the url + redirects
-  // for(var i=0; i<beacons['beacons'].length; i++){
-    // if (major == beacons['beacons'][i].major && minor == beacons['beacons'][i].minor){
-      // if(!req.secure){
-        // res.json(beacons['beacons'][i]);
-      // }
-    // }
-  // }
-  
-  // next()
-  
-// });
 
 app.get('/:major/:minor/redirect', function(req,res,next){
   var major = req.params.major;
@@ -74,7 +52,6 @@ app.get('/:major/:minor/redirect', function(req,res,next){
  //checks if major and minor are part of the url + redirects
   for(var i=0; i<beacons['beacons'].length; i++){
     if (major == beacons['beacons'][i].major && minor == beacons['beacons'][i].minor){
-    // if (major == beacons['beacons'][i].major){
       if(!req.secure){
         res.redirect(301, beacons['beacons'][i].uri);
 		//res.json(beacons['beacons'][i]);
@@ -164,7 +141,7 @@ app.post('/rooms/:room/booking', function(req, res) {
       var jObject = {"URI": uri, 'date':date, 'StartT':startTime, 'EndT': endTime, 'MeetingName':meetingName, 'Users':users};
       var pos = newBooking['bookings'].length;
       newBooking['bookings'][pos]= jObject;
-      //converts the while booking to a string for saving
+      //converts the new booking to a string for saving
       var strBookings = JSON.stringify(jBookings, null, 4);
       }
   }
@@ -185,15 +162,11 @@ app.get('/rooms/:room/booking/:date', function(req, res){
 	var room = req.params.room;
 	var date = req.params.date;
 	
-	// console.log("room: " + room);
-	// console.log("date: " + date);
-	
   var jBookings = getJson('bookings.json');
 	var strBookings;
     for (var i = 0; i< jBookings['rooms'].length; i++) {
         if (room == jBookings['rooms'][i].roomname){
           strBookings = jBookings['rooms'][i];
-		  //console.log(strBookings);
         }
     }
 	
@@ -239,9 +212,8 @@ app.get('/:major/:minor', function(req,res,next){
     var bookings = getBooking(myroom);
     var roomAvailability = getCurrentAvailability(bookings);
     var beaconInfo = getBeacon(major,minor)
-    console.log(roomAvailability); 
       res.json({beacon :beaconInfo , available: roomAvailability});
-        // res.json(beacons['beacons'][i]);
+      // res.json(beacons['beacons'][i]);
     }
   }
   

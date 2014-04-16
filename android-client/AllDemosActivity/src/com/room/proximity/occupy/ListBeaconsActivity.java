@@ -251,6 +251,7 @@ public class ListBeaconsActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
                 intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+                Log.e("Activity","StartActivtiy - ListBeacons");
                 startActivity(intent);
             }
         };

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -60,8 +61,9 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
 
             @Override
             public void onClick(View v) {
-                AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
-                asyncHttpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
+
+                        AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
+                        asyncHttpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
             }
         });
 
@@ -91,6 +93,8 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
             }
 
         });
+        
+        Log.e("Activity","InPostActivity");
     }	
 
     @Override
@@ -119,6 +123,7 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
 
         @Override
         protected String doInBackground(String... params) {
+ 
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
@@ -132,6 +137,9 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
                 EditText endT = (EditText) currentView.findViewById(R.id.edtEndTime);
                 //EditText users = (EditText) currentView.findViewWithTag("edtUsers");
 
+                //                if(date.toString() != null || startT.toString() != null || endT.toString() != null){
+                //                    Toast.makeText(getBaseContext(), "You missed a field!", Toast.LENGTH_SHORT).show();
+                //                }else{
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("uri",""));
                 nameValuePairs.add(new BasicNameValuePair("date",date.getText().toString()));
@@ -140,10 +148,11 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
                 nameValuePairs.add(new BasicNameValuePair("endTime", endT.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("users", ""));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
                 HttpResponse response = httpClient.execute(httppost);
 
-                result = "1";
+                result = "1";    
+                //                }
+
             } catch (UnsupportedEncodingException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -158,20 +167,16 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
             }		
             return result;
         }
-
+                
         @Override
         protected void onPostExecute(String result) {
-            if(result != "0"){
-                Toast.makeText(getBaseContext(), "Booking Made!", Toast.LENGTH_LONG).show();
-            }
-
-            if (result == "0") {
-                Log.d("beacons", "");
-            }
-            else{
-                Toast.makeText(getBaseContext(), "Booking Error!", Toast.LENGTH_LONG).show();
+            if(result == "1"){
+                Toast.makeText(getBaseContext(), "Booking Made!", Toast.LENGTH_SHORT).show();
+            }else if(result == "0"){
+                Toast.makeText(getBaseContext(), "Booking Error!", Toast.LENGTH_SHORT).show();
             }
         }
+             
     }
 
     @Override
@@ -193,7 +198,7 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
                     String startTime = jBookings.getJSONObject(i).optString("StartT");
                     String endTime = jBookings.getJSONObject(i).optString("EndT");
 
-                    SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat parser = new SimpleDateFormat("HH:mm",Locale.UK);
                     Date start = parser.parse(startTime);
                     Date end = parser.parse(endTime);
 

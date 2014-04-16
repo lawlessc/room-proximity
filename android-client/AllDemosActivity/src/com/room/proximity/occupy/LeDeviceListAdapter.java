@@ -17,7 +17,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,9 +36,8 @@ public class LeDeviceListAdapter extends BaseAdapter {
     private ArrayList<Beacon> beacons;
     private LayoutInflater inflater;
 
-    int major = 0;
-    int minor = 0;
-    Drawable image;
+    int major = -1;
+    int minor = -1;
 
 
     public LeDeviceListAdapter(Context context) {
@@ -93,27 +91,24 @@ public class LeDeviceListAdapter extends BaseAdapter {
             room =  json.getJSONObject("beacon").getString("room");
             availability =   json.getString("available");
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ExecutionException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        holder.roomNameView.setText(room);      
-
+        holder.roomNameView.setText(room); 
+        holder.roomNameView.setTextColor(Color.WHITE);
+        
+        //TODO change beacon json to store RGB values rather than string
+        //will allow only one call to set the ListView colour
         if(colour.equalsIgnoreCase("blue")){
             view.setBackgroundColor(Color.rgb(91,192,222));
-            holder.roomNameView.setTextColor(Color.WHITE);
         }else if(colour.equalsIgnoreCase("green")){
             view.setBackgroundColor(Color.rgb(169,219,169));
-            holder.roomNameView.setTextColor(Color.WHITE);
         }else if(colour.equalsIgnoreCase("navy")){
             view.setBackgroundColor(Color.rgb(45,37,86));
-            holder.roomNameView.setTextColor(Color.WHITE);
         }
 
         if(availability.equalsIgnoreCase("occupied")){
@@ -152,7 +147,6 @@ public class LeDeviceListAdapter extends BaseAdapter {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            //TODO add on post 
         }
     }
 
