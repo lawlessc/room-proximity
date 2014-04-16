@@ -2,6 +2,18 @@
 
 <resources>
     <!-- Menu items -->
-    <string name="menu_connect">Search</string>
+    <string name="search">Rescan</string>
     <string name="logo_desc">Logo</string>
+    <string name="occ_now">Occupy</string>
+    <string name="occupy_ltr">Occupy Later</string>
+    <string name="meeting">Meeting Name</string>
+    <string name="edt_date">Touch to set date</string>
+    <string name="edt_time">Touch to set time</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+    <string name="startT">Start @</string>
+    <string name="endT">End @</string>
+    <string name="occupation">Details</string>
+    <string name="availibility">Availility</string>
+   
 </resources>

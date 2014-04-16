@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE manifest>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.estimote.examples.demos"
+          package="com.room.proximity.occupy"
           android:versionCode="1"
           android:versionName="1.0">
 
@@ -18,28 +19,39 @@
   <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
   <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 
+  
+  <!-- App icon is Meeting by Julieta Felix on The Noun Project -->
   <application
-      android:label="Estimote Demos"
-      android:theme="@android:style/Theme.Holo.Light">
+      android:label="Occupy"
+      android:theme="@style/AppTheme"
+      android:icon="@drawable/occupy_logo"
+      android:logo="@drawable/occupy_logo"
+      android:allowBackup="true">
+      
+<!--       <style name="Theme.Holo.Light" parent="@android:style/TextAppearance">
+          <item name="android:textColor">#FF530D</item>
+          
+      </style> -->
  
     <activity
-        android:name="com.estimote.examples.demos.ListBeaconsActivity"
+        android:name="com.room.proximity.occupy.ListBeaconsActivity"
         android:label="Occupy"
         android:screenOrientation="portrait">
        <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>     
+    </activity>   
+      
     <activity
-        android:name="com.estimote.examples.demos.BookingActivity"
+        android:name="com.room.proximity.occupy.BookingActivity"
         android:label="Occupy"
-        android:screenOrientation="portrait" />
+        android:screenOrientation="portrait"/>
     
- <activity
-        android:name="com.estimote.examples.demos.PostBookingActivity"
-        android:label="Occupy"
-        android:screenOrientation="portrait" />
+    <activity
+            android:name="com.room.proximity.occupy.PostBookingActivity"
+            android:label="Occupy"
+            android:screenOrientation="portrait" />
 
     <!-- Estimote service responsible for scanning beacons. -->
     <service android:name="com.estimote.sdk.service.BeaconService"
