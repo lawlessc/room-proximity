@@ -3,6 +3,8 @@
 <resources>
     <!-- Menu items -->
     <string name="search">Rescan</string>
+    
+    <!-- Occupy Pages  -->
     <string name="logo_desc">Logo</string>
     <string name="occ_now">Occupy</string>
     <string name="occupy_ltr">Occupy Later</string>
@@ -15,5 +17,13 @@
     <string name="endT">End @</string>
     <string name="occupation">Details</string>
     <string name="availibility">Availility</string>
-   
+    
+    <!-- Filler for app -->
+    <string name="location">Location</string>
+    <string name="capacity">Capacity</string>
+    <string name="webcam">Webcam</string>
+    <string name="phone">Phone</string>
+    <string name="roomName">roomName</string>
+    <string name="owner">Owner</string>
+      
 </resources>

@@ -137,9 +137,6 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
                 EditText endT = (EditText) currentView.findViewById(R.id.edtEndTime);
                 //EditText users = (EditText) currentView.findViewWithTag("edtUsers");
 
-                //                if(date.toString() != null || startT.toString() != null || endT.toString() != null){
-                //                    Toast.makeText(getBaseContext(), "You missed a field!", Toast.LENGTH_SHORT).show();
-                //                }else{
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("uri",""));
                 nameValuePairs.add(new BasicNameValuePair("date",date.getText().toString()));

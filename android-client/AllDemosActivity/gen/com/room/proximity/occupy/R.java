@@ -67,20 +67,30 @@ public final class R {
     }
     public static final class string {
         public static final int availibility=0x7f06000c;
+        public static final int capacity=0x7f06000e;
         public static final int date=0x7f060008;
         public static final int edt_date=0x7f060005;
         public static final int edt_time=0x7f060006;
         public static final int endT=0x7f06000a;
+        /**  Filler for app 
+         */
+        public static final int location=0x7f06000d;
+        /**  Occupy Pages  
+         */
         public static final int logo_desc=0x7f060001;
         public static final int meeting=0x7f060004;
         public static final int name=0x7f060007;
         public static final int occ_now=0x7f060002;
         public static final int occupation=0x7f06000b;
         public static final int occupy_ltr=0x7f060003;
+        public static final int owner=0x7f060012;
+        public static final int phone=0x7f060010;
+        public static final int roomName=0x7f060011;
         /**  Menu items 
          */
         public static final int search=0x7f060000;
         public static final int startT=0x7f060009;
+        public static final int webcam=0x7f06000f;
     }
     public static final class style {
         public static final int AppTheme=0x7f070000;

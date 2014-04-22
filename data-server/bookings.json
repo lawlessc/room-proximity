@@ -18,6 +18,14 @@
                     "EndT": "12:00",
                     "MeetingName": "CATE Update",
                     "Users": "Hank Hill"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "22/3/2014",
+                    "StartT": "12:15",
+                    "EndT": "13:15",
+                    "MeetingName": "TestUser's Meeting",
+                    "Users": "appUser"
                 }
             ]
         },
@@ -39,14 +47,6 @@
                     "EndT": "13:00",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Bobby Hill"
-                },
-                {
-                    "URI": "/here/who/is/where",
-                    "date": "",
-                    "StartT": "",
-                    "EndT": "",
-                    "MeetingName": "TestUser's Meeting",
-                    "Users": "appUser"
                 }
             ]
         },
@@ -64,8 +64,8 @@
                 {
                     "URI": "scotia/booking2",
                     "date": "7/4/14",
-                    "StartT": "12:00",
-                    "EndT": "13:00",
+                    "StartT": "12:30",
+                    "EndT": "13:30",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Hank Hill"
                 }
