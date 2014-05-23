@@ -1,6 +1,7 @@
 package com.room.proximity.occupy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,14 +14,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.utils.L;
+import com.room.proximity.occupy.R.color;
 
 /**
  * Based on work of wiktorgworek@google.com (Wiktor Gworek)
@@ -42,12 +47,17 @@ public class ListBeaconsActivity extends Activity {
     private LeDeviceListAdapter adapter;
     private int scanningTime =0;
 
-
+    Beacon myBeacon = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "test_beacon", "FE:85:EE:7F:E7:6B", 111, 49567, 5, 45);
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+        final View pb = findViewById(R.id.Progress);
+        final TextView dummyInfo = (TextView)findViewById(R.id.dummyModeInfo);
+        final Button btnScan = (Button)findViewById(R.id.btnScan);
+        
         // Configure device list.
         adapter = new LeDeviceListAdapter(this);
         ListView list = (ListView) findViewById(R.id.device_list);
@@ -62,12 +72,13 @@ public class ListBeaconsActivity extends Activity {
         try {
             beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
             beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);
+            beaconManager.setBackgroundScanPeriod(5000, 30000);
+            beaconManager.setForegroundScanPeriod(7000, 5000);
         } catch (RemoteException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        Button btnScan = (Button) findViewById(R.id.btnScan);
         btnScan.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -76,18 +87,55 @@ public class ListBeaconsActivity extends Activity {
             }
         }); 
 
+        final ToggleButton toggle = (ToggleButton) findViewById(R.id.DummyMode);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    toggle.setBackgroundColor(color.red);
+                    dummyBeacon();
+                    pb.setVisibility(View.GONE);
+                    dummyInfo.setVisibility(View.VISIBLE);
+                    btnScan.setEnabled(false);
+                    try {
+                        beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+                        beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);  
+                    } catch (RemoteException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
+                    
+                } else {
+                    // The toggle is disabled
+                    toggle.setBackgroundDrawable(null);
+                    dummyInfo.setVisibility(View.GONE);
+                    btnScan.setEnabled(true);
+                    adapter.replaceWith(Collections.<Beacon>emptyList());
+//                    scan(null);
+                }
+            }
+        });
+
+        
         //scan the first time the app is opened
         scan(null);
     }
-
+    
+    public void dummyBeacon(){ 
+        List<Beacon> dummyBeacon = new ArrayList<Beacon>(1);
+        dummyBeacon.add(myBeacon);
+        adapter.replaceWith(dummyBeacon);     
+    }  
+        
     public void scan(View view){   
         final LinearLayout pb = (LinearLayout)findViewById(R.id.Progress);
         final View Scan = (View)findViewById(R.id.btnScan);
         pb.setVisibility(View.VISIBLE);
-        scanningTime=0;
+        scanningTime=0; 
         connectToService();
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
-
+            
             @Override
             public void onBeaconsDiscovered(Region region, final List<Beacon> beacons) {  
                 // Note that results are not delivered on UI thread.
@@ -107,10 +155,10 @@ public class ListBeaconsActivity extends Activity {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
                             }
-                        }
+                        }                      
                     }
                 });
-            }
+            }  
         });  
     }
 
@@ -120,6 +168,7 @@ public class ListBeaconsActivity extends Activity {
             if (beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_BEACON_PROXIMITY_UUID)
                     || beacon.getProximityUUID().equalsIgnoreCase(ESTIMOTE_IOS_PROXIMITY_UUID)) {
                 filteredBeacons.add(beacon);
+                
             }
         }
         return filteredBeacons;
@@ -184,6 +233,12 @@ public class ListBeaconsActivity extends Activity {
 
         super.onDestroy();
     }
+    
+    @Override
+    protected void onPause(){
+        super.onPause();
+        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
+    }
 
     @Override
     protected void onStart() {
@@ -213,7 +268,7 @@ public class ListBeaconsActivity extends Activity {
         }
         super.onStop();
     }
-
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_ENABLE_BT) {
@@ -229,13 +284,14 @@ public class ListBeaconsActivity extends Activity {
 
     private void connectToService() {
         // getActionBar().setSubtitle("Scanning...");
-        // adapter.replaceWith(Collections.<Beacon>emptyList());
+        adapter.replaceWith(Collections.<Beacon>emptyList());
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
                 try {
                     beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_REGION);
                     Log.e("ranging", "started searching");
+                    
                 } catch (RemoteException e) {
                     Toast.makeText(ListBeaconsActivity.this, "Cannot start ranging, something terrible happened",
                             Toast.LENGTH_LONG).show();
@@ -251,6 +307,8 @@ public class ListBeaconsActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListBeaconsActivity.this, BookingActivity.class);
                 intent.putExtra(EXTRAS_BEACON, adapter.getItem(position));
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Log.e("Activity","StartActivtiy - ListBeacons");
                 startActivity(intent);
             }

@@ -40,30 +40,40 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
     private static final int END_TIME_PICKER_ID = 2;
     JSONArray jBookings =  null;
     Button book = null;
+    String room = null;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.occupy_later);
-        overridePendingTransition(R.anim.activity_open_translate,R.anim.activitiy_close_scale);
-        final String room = getIntent().getStringExtra("roomname");
+        overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
         EditText meetingName = (EditText)findViewById(R.id.edtMeetingName);
         meetingName.setText("TestUser's Meeting");
-
-        try {
-            jBookings = new JSONArray(getIntent().getStringExtra("bookings"));
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
+//        Intent intent = getIntent();
+//        Bundle extras = intent.getExtras();
+//        if (extras != null) {
+//            try {
+//                jBookings = new JSONArray(intent.getStringExtra("bookings"));
+//                room = getIntent().getStringExtra("roomname");
+//            } catch (JSONException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }
+        
 
         Button book = (Button) findViewById(R.id.btnSave);
         book.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                        AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
-                        asyncHttpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
+                if(room != null){
+                    AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
+                    asyncHttpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
+                }else{
+                    Toast.makeText(getBaseContext(), "Dummy Booking Made!", Toast.LENGTH_SHORT).show();
+                }
+              
             }
         });
 
@@ -100,7 +110,7 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.activity_open_scale,R.anim.activitiy_close_translate);
+        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
     }
 
     public void InputStartTime(View v) {
@@ -190,37 +200,42 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
             ((EditText) findViewById(R.id.edtStartTime)).setText( hourOfDay + ":" + minute);
             break;
         case 2:
-            for(int i = 0;i<jBookings.length();i++){
-                try {
-                    String startTime = jBookings.getJSONObject(i).optString("StartT");
-                    String endTime = jBookings.getJSONObject(i).optString("EndT");
+            if(jBookings != null){
+                for(int i = 0;i<jBookings.length();i++){
+                    try {
+                        String startTime = jBookings.getJSONObject(i).optString("StartT");
+                        String endTime = jBookings.getJSONObject(i).optString("EndT");
 
-                    SimpleDateFormat parser = new SimpleDateFormat("HH:mm",Locale.UK);
-                    Date start = parser.parse(startTime);
-                    Date end = parser.parse(endTime);
+                        SimpleDateFormat parser = new SimpleDateFormat("HH:mm",Locale.UK);
+                        Date start = parser.parse(startTime);
+                        Date end = parser.parse(endTime);
 
-                    String bookingTime = (Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
-                    EditText edtbookingStart = (EditText)findViewById(R.id.edtStartTime);
-                    String strbookingStart = edtbookingStart.getText().toString();
-                    Date now = parser.parse(bookingTime);
-                    Date startnow = parser.parse(strbookingStart);
+                        String bookingTime = (Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+                        EditText edtbookingStart = (EditText)findViewById(R.id.edtStartTime);
+                        String strbookingStart = edtbookingStart.getText().toString();
+                        Date now = parser.parse(bookingTime);
+                        Date startnow = parser.parse(strbookingStart);
 
-                    if(now.after(start) && now.before(end) || startnow.after(start) && startnow.before(end) ){
-                        Toast.makeText(getBaseContext(), "Room occupied during that time", Toast.LENGTH_SHORT).show();	    				
-                    }else{
-                        ((EditText) findViewById(R.id.edtEndTime)).setText( hourOfDay + ":" + minute);
+                        if(now.after(start) && now.before(end) || startnow.after(start) && startnow.before(end) ){
+                            Toast.makeText(getBaseContext(), "Room occupied during that time", Toast.LENGTH_SHORT).show();                      
+                        }else{
+                            ((EditText) findViewById(R.id.edtEndTime)).setText( hourOfDay + ":" + minute);
+                        }
+
+                    } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
 
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
-
+                break;
+            }else{
+                ((EditText) findViewById(R.id.edtEndTime)).setText( hourOfDay + ":" + minute);
             }
-            break;
+           
         }
     }
 }

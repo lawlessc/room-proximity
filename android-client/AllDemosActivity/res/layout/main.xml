@@ -27,6 +27,25 @@
         android:textSize="40sp"
         android:visibility="gone" />
 
+    <ToggleButton
+        android:id="@+id/DummyMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:textOn="" 
+        android:textOff=""
+        android:text="" />
+
+    <TextView
+        android:id="@+id/dummyModeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dummyInfo"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/Progress"
         android:layout_width="fill_parent"

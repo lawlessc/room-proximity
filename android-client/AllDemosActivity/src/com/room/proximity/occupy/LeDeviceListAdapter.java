@@ -83,40 +83,54 @@ public class LeDeviceListAdapter extends BaseAdapter {
         String room = null;
         String availability= null;
 
-        try {
-            String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
-            JSONObject json = new JSONObject(beaconData);
-
-            colour = json.getJSONObject("beacon").getString("colour");
-            room =  json.getJSONObject("beacon").getString("room");
-            availability =   json.getString("available");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        holder.roomNameView.setText(room); 
-        holder.roomNameView.setTextColor(Color.WHITE);
-        
-        //TODO change beacon json to store RGB values rather than string
-        //will allow only one call to set the ListView colour
-        if(colour.equalsIgnoreCase("blue")){
+        if(major == 111){
+            
+            holder.roomNameView.setText("Dummy Room"); 
+            holder.roomNameView.setTextColor(Color.WHITE);
             view.setBackgroundColor(Color.rgb(91,192,222));
-        }else if(colour.equalsIgnoreCase("green")){
-            view.setBackgroundColor(Color.rgb(169,219,169));
-        }else if(colour.equalsIgnoreCase("navy")){
-            view.setBackgroundColor(Color.rgb(45,37,86));
-        }
-
-        if(availability.equalsIgnoreCase("occupied")){
-            holder.availabilityImage.setImageResource(R.drawable.red_dot);
-        } else {    	
             holder.availabilityImage.setImageResource(R.drawable.green_dot);
-        } 
+            
+            
+        }else if (major != 111){
+            
+            try {
+                String beaconData = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor).get();
+                JSONObject json = new JSONObject(beaconData);
 
+                colour = json.getJSONObject("beacon").getString("colour");
+                room =  json.getJSONObject("beacon").getString("room");
+                availability =   json.getString("available");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            holder.roomNameView.setText(room); 
+            holder.roomNameView.setTextColor(Color.WHITE);
+            
+            //TODO change beacon json to store RGB values rather than string
+            //will allow only one call to set the ListView colour
+            if(colour.equalsIgnoreCase("blue")){
+                view.setBackgroundColor(Color.rgb(91,192,222));
+            }else if(colour.equalsIgnoreCase("green")){
+                view.setBackgroundColor(Color.rgb(169,219,169));
+            }else if(colour.equalsIgnoreCase("navy")){
+                view.setBackgroundColor(Color.rgb(45,37,86));
+            }
+
+            if(availability.equalsIgnoreCase("occupied")){
+                holder.availabilityImage.setImageResource(R.drawable.red_dot);
+            } else {        
+                holder.availabilityImage.setImageResource(R.drawable.green_dot);
+            } 
+
+            
+        }
+        
+        
     }
 
     private View inflateIfRequired(View view, int position, ViewGroup parent) {

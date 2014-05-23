@@ -36,7 +36,8 @@
     <activity
         android:name="com.room.proximity.occupy.ListBeaconsActivity"
         android:label="Occupy"
-        android:screenOrientation="portrait">
+        android:screenOrientation="portrait"
+        android:launchMode="singleTop">
        <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
@@ -46,12 +47,14 @@
     <activity
         android:name="com.room.proximity.occupy.BookingActivity"
         android:label="Occupy"
-        android:screenOrientation="portrait"/>
+        android:screenOrientation="portrait"
+        android:launchMode="singleTop"/>
     
     <activity
             android:name="com.room.proximity.occupy.PostBookingActivity"
             android:label="Occupy"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" 
+            android:launchMode="singleTop"/>
 
     <!-- Estimote service responsible for scanning beacons. -->
     <service android:name="com.estimote.sdk.service.BeaconService"

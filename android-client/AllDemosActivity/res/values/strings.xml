@@ -3,6 +3,8 @@
 <resources>
     <!-- Menu items -->
     <string name="search">Rescan</string>
+    <string name="dummyInfo">You are now in test mode</string>
+    
     
     <!-- Occupy Pages  -->
     <string name="logo_desc">Logo</string>

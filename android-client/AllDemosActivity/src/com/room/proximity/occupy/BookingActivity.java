@@ -48,94 +48,80 @@ public class BookingActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.occupy_now);
-        overridePendingTransition(R.anim.activity_open_translate,R.anim.activitiy_close_scale);
+        overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
 
         Beacon beacon = getIntent().getParcelableExtra(ListBeaconsActivity.EXTRAS_BEACON);
         major = beacon.getMajor();
         minor = beacon.getMinor();
-
-        Log.e("Activity","InBookingActivity - Before GET");
-       // populate(major,minor);
         
-        ////////////////////////////////////////
-        
-        
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
+        if (major !=111 ){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
-                try {
-                    String room = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor + "/redirect").get();
-                    JSONObject json = new JSONObject(room);
-                    String available = json.get("available").toString();
-                    JSONObject jRoom = json.getJSONObject("roomDetails");
-                    roomName = jRoom.getString("name").toString();
-                    jBookings = json.getJSONObject("bookings");
-                    bookingArray = jBookings.getJSONArray("bookings");
+                    try {
+                        String room = new HttpAsyncTask().execute("http://localhost:8888/" + major + "/" + minor + "/redirect").get();
+                        JSONObject json = new JSONObject(room);
+                        String available = json.get("available").toString();
+                        JSONObject jRoom = json.getJSONObject("roomDetails");
+                        roomName = jRoom.getString("name").toString();
+                        jBookings = json.getJSONObject("bookings");
+                        bookingArray = jBookings.getJSONArray("bookings");
 
-                    TextView name = new TextView(getApplicationContext());
-                    TextView location = new TextView(getApplicationContext());
-                    TextView capacity = new TextView(getApplicationContext());
-                    TextView phone = new TextView(getApplicationContext());
-                    TextView owner = new TextView(getApplicationContext());
-                    TextView conferencing = new TextView(getApplicationContext());
+                        TextView name = new TextView(getApplicationContext());
+                        TextView location = new TextView(getApplicationContext());
+                        TextView capacity = new TextView(getApplicationContext());
+                        TextView phone = new TextView(getApplicationContext());
+                        TextView owner = new TextView(getApplicationContext());
+                        TextView conferencing = new TextView(getApplicationContext());
 
-                    name = (TextView)findViewById(R.id.roomName);        
-                    location = (TextView)findViewById(R.id.Location);
-                    capacity = (TextView)findViewById(R.id.Capacity);
-                    phone = (TextView)findViewById(R.id.Phone);  
-                    owner = (TextView)findViewById(R.id.Owner);          
-                    conferencing = (TextView)findViewById(R.id.Webcam);
+                        name = (TextView)findViewById(R.id.roomName);        
+                        location = (TextView)findViewById(R.id.Location);
+                        capacity = (TextView)findViewById(R.id.Capacity);
+                        phone = (TextView)findViewById(R.id.Phone);  
+                        owner = (TextView)findViewById(R.id.Owner);          
+                        conferencing = (TextView)findViewById(R.id.Webcam);
 
-                    name.setText(jRoom.optString("name"));
-                    location.setText(jRoom.optString("location"));
-                    capacity.setText("Fits " + jRoom.optString("capacity"));
-                    phone.setText("Phone: " + jRoom.optString("phone"));
-                    owner.setText("Owned by " + jRoom.optString("owner"));
-                    conferencing.setText("Webcam: " + jRoom.optString("conferencing"));
+                        name.setText(jRoom.optString("name"));
+                        location.setText(jRoom.optString("location"));
+                        capacity.setText("Fits " + jRoom.optString("capacity"));
+                        phone.setText("Phone: " + jRoom.optString("phone"));
+                        owner.setText("Owned by " + jRoom.optString("owner"));
+                        conferencing.setText("Webcam: " + jRoom.optString("conferencing"));
 
-                    if(available.equalsIgnoreCase("occupied")){
-                        View btnOccpied = findViewById(R.id.btnOccupyNow);
-                        Button btnOccLtr = (Button) findViewById(R.id.btnOccupyLater);
-                        btnOccpied.setVisibility(View.GONE);
-                        btnOccLtr.setTextSize(40);
+                        if(available.equalsIgnoreCase("occupied")){
+                            View btnOccpied = findViewById(R.id.btnOccupyNow);
+                            Button btnOccLtr = (Button) findViewById(R.id.btnOccupyLater);
+                            btnOccpied.setVisibility(View.GONE);
+                            btnOccLtr.setTextSize(40);
+                        }
+
+                    } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } 
+                    catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
-
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } 
-                catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
-
-            }
-
-        });
-        
-        
-        /////////////////////////////////////////
-        Log.e("Activity","InBookingActivity -After GET");
+            });
+        }
     }
 
-    protected void populate(int major, int minor){
-
-       
-    }
 
 //    public void occupyNow (MenuItem item){
 //        myAsyncHttpPost asyncHttpPost = new myAsyncHttpPost();
 //        asyncHttpPost.execute("http://localhost:8888/rooms/" + roomName + "/booking");
 //    }
-
+    
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.activity_open_scale,R.anim.activitiy_close_translate);
+        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
     }
 
     class myAsyncHttpPost extends AsyncTask<String, String, String>{
@@ -190,7 +176,6 @@ public class BookingActivity extends Activity{
                 Toast.makeText(getBaseContext(), "Booking Error!", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     public class HttpAsyncTask extends AsyncTask<String, Void, String> {
@@ -246,19 +231,34 @@ public class BookingActivity extends Activity{
     }
 
     public void occupyNow(View v) {
-        myAsyncHttpPost asyncHttpPost = new myAsyncHttpPost();
-        asyncHttpPost.execute("http://localhost:8888/rooms/" + roomName + "/booking");
+        if (jBookings != null){
+            myAsyncHttpPost asyncHttpPost = new myAsyncHttpPost();
+            asyncHttpPost.execute("http://localhost:8888/rooms/" + roomName + "/booking");
+        }else 
+            Toast.makeText(getApplicationContext(), "Dummy Booking Made", Toast.LENGTH_SHORT).show();
+        
     }
 
     public void occupyLater(View v) {
         try {
-            Intent i = new Intent(getApplicationContext(), PostBookingActivity.class);
-            String rName;
-            rName = jBookings.getString("roomname").toString();
-            i.putExtra("roomname", rName );
-            i.putExtra("bookings", bookingArray.toString());
-            Log.e("Activity","StartActivity");
-            startActivity(i);
+            if (jBookings != null){
+                Intent i = new Intent(getApplicationContext(), PostBookingActivity.class);
+                String rName;
+                rName = jBookings.getString("roomname").toString();
+                i.putExtra("roomname", rName );
+                i.putExtra("bookings", bookingArray.toString());
+                Log.e("Activity","StartActivity");
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+                startActivity(i);
+            }else{
+              Intent i = new Intent(getApplicationContext(), PostBookingActivity.class);
+              i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//              overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+              startActivity(i);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

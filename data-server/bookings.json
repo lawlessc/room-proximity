@@ -47,6 +47,14 @@
                     "EndT": "13:00",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Bobby Hill"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "28/04/14",
+                    "StartT": "10:32",
+                    "EndT": "11:32",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
                 }
             ]
         },
