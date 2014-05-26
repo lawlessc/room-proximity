@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/vetch">
+
+    <TextView
+        android:id="@+id/Location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/roomName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/location"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Capacity"
+        android:layout_centerHorizontal="true"
+        android:text="@string/phone"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Webcam"
+        android:layout_centerHorizontal="true"
+        android:text="@string/owner"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Webcam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Phone"
+        android:layout_centerHorizontal="true"
+        android:text="@string/webcam"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Capacity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Location"
+        android:layout_centerHorizontal="true"
+        android:text="@string/capacity"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/roomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/roomName"
+        android:textAlignment="2"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="48sp"
+        android:textColor="@color/blue" />
+
+    <Button
+        android:id="@+id/btnOccupyLater"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="85dp"
+        android:text="@string/occupy_ltr"
+        android:onClick="occupyLater" 
+        android:textColor="@color/orange"
+        android:visibility="visible"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/btnOccupyNow"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnOccupyLater"
+        android:layout_alignParentLeft="true"
+        android:onClick="occupyNow"
+        android:text="@string/occ_now"
+        android:textColor="@color/orange"
+        android:textSize="40sp" />
+
+</RelativeLayout>

@@ -1,4 +1,3 @@
 INDEX VERSION 1.126+/Users/chris/Desktop/roomProximity/room-proximity/.metadata/.plugins/org.eclipse.jdt.core
-2405190248.index
 718952985.index
 3483092490.index
