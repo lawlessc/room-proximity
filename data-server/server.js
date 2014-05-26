@@ -15,9 +15,9 @@ app.use(function(req, res, next){
 //app.use(express.logger());
 
 //for POSTS
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
+//app.use(express.json());
+//app.use(express.urlencoded());
+//app.use(express.methodOverride());
 
 //start server
 var server = app.listen(8888, function() {
