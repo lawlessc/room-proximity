@@ -5,24 +5,24 @@
             "major": "666",
             "minor": "49567",
             "colour": "blue",
-            "room": "Solas",
-            "uri": "/rooms/Solas"
+            "room": "Jupiter",
+            "uri": "/rooms/Jupiter"
         },
         {
             "uuid": 2,
             "major": "55149",
             "minor": "5016",
             "colour": "green",
-            "room": "Nova",
-            "uri": "/rooms/Nova"
+            "room": "Saturn",
+            "uri": "/rooms/Saturn"
         },
         {
             "uuid": 3,
             "major": "24723",
             "minor": "63838",
             "colour": "navy",
-            "room": "Scotia",
-            "uri": "/rooms/Scotia"
+            "room": "Neptune",
+            "uri": "/rooms/Neptune"
         }
     ]
 }

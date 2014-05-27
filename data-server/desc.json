@@ -1,33 +1,33 @@
 {
     "rooms": [
         {
-            "name": "Solas",
+            "name": "Jupiter",
             "location": "1st floor",
             "capacity": "10",
             "phone": "01-6213645",
-            "owner": "CATE",
+            "owner": "Ares",
             "conferencing": true,
-            "uri":"/rooms/Solas",
+            "uri":"/rooms/Jupiter",
             "beacon":"/beacons/beacon1"
         },
         {
-            "name": "Scotia",
+            "name": "Saturn",
             "location": "2nd floor",
             "capacity": "7",
             "phone": "01-6236852",
-            "owner": "CTO",
+            "owner": "Hades",
             "conferencing": true,
-            "uri":"/rooms/Scotia",
+            "uri":"/rooms/Saturn",
             "beacon":"/beacons/beacon2"
         },
         {
-            "name": "Nova",
+            "name": "Neptune",
             "location": "Ground floor",
             "capacity": "20",
             "phone": "01-6245316",
-            "owner": "ATIS",
+            "owner": "Zeus",
             "conferencing": true,
-            "uri":"/rooms/Nova",
+            "uri":"/rooms/Neptune",
             "beacon":"/beacons/beacon3"            
         }
     ]
