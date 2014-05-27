@@ -92,6 +92,14 @@
                     "EndT": "15:58",
                     "MeetingName": "testUser's Meeting",
                     "Users": "appUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "27/05/14",
+                    "StartT": "16:56",
+                    "EndT": "17:56",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
                 }
             ]
         }

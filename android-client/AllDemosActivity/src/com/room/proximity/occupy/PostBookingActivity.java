@@ -68,8 +68,14 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
             @Override
             public void onClick(View v) {
                 if(room != null){
-                    AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
-                    asyncHttpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
+                    String[] postValues = getValues();
+                    String[] myTaskParams = {"http://localhost:8888/rooms/" + room + "/booking", postValues[0] ,  postValues[1]  , postValues[2] ,postValues[3] };
+                    myAsyncTaskPost post = new myAsyncTaskPost();
+                    post.execute(myTaskParams);
+//                    HttpPostBooking httpPost = new HttpPostBooking("test", "test", "test", "test", "test", "test");
+//                    httpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
+//                    AsyncHttpPost asyncHttpPost = new AsyncHttpPost();
+//                    asyncHttpPost.execute("http://localhost:8888/rooms/" + room + "/booking");
                 }else{
                     Toast.makeText(getBaseContext(), "Dummy Booking Made!", Toast.LENGTH_SHORT).show();
                 }
@@ -127,6 +133,20 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
     }
+    
+    public String[] getValues(){
+        View currentView = findViewById(android.R.id.content);
+
+        EditText date = (EditText) currentView.findViewById(R.id.edtDate);
+        EditText meetingName = (EditText) currentView.findViewById(R.id.edtMeetingName);
+        EditText startT = (EditText) currentView.findViewById(R.id.edtStartTime);
+        EditText endT = (EditText) currentView.findViewById(R.id.edtEndTime);
+        
+        String[] postValues = {date.getText().toString(),meetingName.getText().toString(),startT.getText().toString(),endT.getText().toString()};
+        
+        return postValues;
+        //EditText users = (EditText) currentView.findViewWithTag("edtUsers");
+    }
 
     class AsyncHttpPost extends AsyncTask<String, String, String>{
         String result = "0";
@@ -150,9 +170,9 @@ public class PostBookingActivity extends Activity implements OnDateSetListener, 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("uri",""));
                 nameValuePairs.add(new BasicNameValuePair("date",date.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("meetingName",meetingName.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("startTime", startT.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("endTime", endT.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("meetingName",date.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("startTime", date.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("endTime", date.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("users", ""));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpClient.execute(httppost);

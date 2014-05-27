@@ -155,59 +155,59 @@ public class BookingActivity extends Activity{
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
     }
 
-    class myAsyncHttpPost extends AsyncTask<String, String, String>{
-        String result = "0";
-
-        @Override
-        protected String doInBackground(String... params) {
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(params[0]);
-            try{			
-                SimpleDateFormat today = new SimpleDateFormat("dd" +"/" +"MM" + "/" +"yy",Locale.UK);
-                SimpleDateFormat time = new SimpleDateFormat("HH" +":" +"mm",Locale.UK);
-                Date now = new Date();
-                long endtime = (now.getTime() + 60 * 60 *1000);
-
-                String currentDate = today.format(new Date());
-                String currentTime = time.format(new Date());
-                String endTime = time.format(endtime);
-
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("uri",""));
-                nameValuePairs.add(new BasicNameValuePair("date",currentDate));
-                nameValuePairs.add(new BasicNameValuePair("meetingName", "testUser's Meeting"));
-                nameValuePairs.add(new BasicNameValuePair("startTime", currentTime));
-                nameValuePairs.add(new BasicNameValuePair("endTime", endTime));
-                nameValuePairs.add(new BasicNameValuePair("users", "testUser"));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-                HttpResponse response = httpClient.execute(httppost);
-
-                result = "1";
-            } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }finally{
-
-            }		
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if(result == "1"){
-                Toast.makeText(getBaseContext(), "Booking Made!", Toast.LENGTH_SHORT).show();
-            }else if(result == "0"){
-                Toast.makeText(getBaseContext(), "Booking Error!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    class myAsyncHttpPost extends AsyncTask<String, String, String>{
+//        String result = "0";
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            HttpClient httpClient = new DefaultHttpClient();
+//            HttpPost httppost = new HttpPost(params[0]);
+//            try{			
+//                SimpleDateFormat today = new SimpleDateFormat("dd" +"/" +"MM" + "/" +"yy",Locale.UK);
+//                SimpleDateFormat time = new SimpleDateFormat("HH" +":" +"mm",Locale.UK);
+//                Date now = new Date();
+//                long endtime = (now.getTime() + 60 * 60 *1000);
+//
+//                String currentDate = today.format(new Date());
+//                String currentTime = time.format(new Date());
+//                String endTime = time.format(endtime);
+//
+//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+//                nameValuePairs.add(new BasicNameValuePair("uri",""));
+//                nameValuePairs.add(new BasicNameValuePair("date",currentDate));
+//                nameValuePairs.add(new BasicNameValuePair("meetingName", "testUser's Meeting"));
+//                nameValuePairs.add(new BasicNameValuePair("startTime", currentTime));
+//                nameValuePairs.add(new BasicNameValuePair("endTime", endTime));
+//                nameValuePairs.add(new BasicNameValuePair("users", "testUser"));
+//                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//
+//                HttpResponse response = httpClient.execute(httppost);
+//
+//                result = "1";
+//            } catch (UnsupportedEncodingException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            } catch (ClientProtocolException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }finally{
+//
+//            }		
+//            return result;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            if(result == "1"){
+//                Toast.makeText(getBaseContext(), "Booking Made!", Toast.LENGTH_SHORT).show();
+//            }else if(result == "0"){
+//                Toast.makeText(getBaseContext(), "Booking Error!", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
     public class HttpAsyncTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
@@ -263,8 +263,10 @@ public class BookingActivity extends Activity{
 
     public void occupyNow(View v) {
         if (jBookings != null){
-            myAsyncHttpPost asyncHttpPost = new myAsyncHttpPost();
-            asyncHttpPost.execute("http://localhost:8888/rooms/" + roomName + "/booking");
+            HttpPostBooking httpPost = new HttpPostBooking();
+            httpPost.execute("http://localhost:8888/rooms/" + roomName + "/booking");
+//            myAsyncHttpPost asyncHttpPost = new myAsyncHttpPost();
+//            asyncHttpPost.execute("http://localhost:8888/rooms/" + roomName + "/booking");
         }else 
             Toast.makeText(getApplicationContext(), "Dummy Booking Made", Toast.LENGTH_SHORT).show();
         

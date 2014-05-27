@@ -70,6 +70,8 @@ public final class R {
     }
     public static final class string {
         public static final int availibility=0x7f06000d;
+        public static final int booking_error=0x7f060015;
+        public static final int booking_made=0x7f060014;
         public static final int capacity=0x7f06000f;
         public static final int date=0x7f060009;
         public static final int dummyInfo=0x7f060001;

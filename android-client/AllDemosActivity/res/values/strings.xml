@@ -27,5 +27,11 @@
     <string name="phone">Phone</string>
     <string name="roomName">roomName</string>
     <string name="owner">Owner</string>
+    
+    
+    <string name="booking_made">Occupied!</string>
+    <string name="booking_error">Error</string>
+    
+    
       
 </resources>
