@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "RoomDetailsViewController.h"
 #import "ESTBeaconManager.h"
-#import "DetailsTableViewController.h"
 #import "Room.h"
 
 #import "Beacon.h"
@@ -16,9 +16,16 @@
 @interface ViewController () <ESTBeaconManagerDelegate>
 
 @property (strong, nonatomic) ESTBeacon *beacon;
-@property (strong, nonatomic) NSArray *beacons;
+
+//@property (strong, nonatomic) NSArray *beacons;
+@property (strong, nonatomic) NSMutableArray *beacons;
 @property (strong, nonatomic) ESTBeaconManager *beaconManager;
 @property (strong, nonatomic) ESTBeaconRegion *beaconRegion;
+
+//for keep the mac address of detected beacons, mac address is null, use minor
+@property (strong, nonatomic) NSMutableArray *minors;
+
+//@property (strong, nonatomic) UIButton *detectButton;
 
 @end
 
@@ -28,7 +35,7 @@
 @implementation ESTTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
         
     }
@@ -42,22 +49,55 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.separatorColor = [UIColor clearColor];
+    
+    self.beacons = [NSMutableArray array];
+    self.minors = [NSMutableArray array];
+    
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [self.tableView tintColor]};
+    
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vetch.png"]];
+//    [tempImageView setFrame:self.tableView.frame];
+    self.tableView.backgroundView = tempImageView;
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
     
     //[self.tableView registerClass:[ESTTableViewCell class] forCellReuseIdentifier:@"CellIdentifier"];
+    
+    UIButton *detectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    detectButton.frame = CGRectMake(65, 385, 190, 50);
+    [detectButton setTitle:@"Rescan" forState:UIControlStateNormal];
+    [detectButton addTarget:self action:@selector(DetectBeacons:) forControlEvents:UIControlEventTouchUpInside];
+    [detectButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:83.0/255.0 blue:13.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [detectButton.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    detectButton.titleLabel.font = [UIFont fontWithName:@"Verdana" size:32];
+    [self.tableView addSubview:detectButton];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     self.beaconManager = [[ESTBeaconManager alloc] init];
     self.beaconManager.delegate = self;
     
     self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID identifier:@"EstimoteSampleRegion"];
+    NSLog(@"---------- start range");
     [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+    NSLog(@"----------");
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    NSLog(@"---------- will Appear");
+//    self.beacons = [[self dummyBeacons] mutableCopy];
+//    [self.tableView reloadData];
+//    [self.beacons removeAllObjects];
+//    [self.minors removeAllObjects];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -65,26 +105,54 @@
     [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
 }
 
+- (NSMutableArray *)dummyBeacons {
+    NSMutableArray *mutableArray = [NSMutableArray new];
+    ESTBeacon *beacon = [[ESTBeacon alloc] init];
+    beacon.proximityUUID = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+    beacon.major = [[NSNumber alloc] initWithInt:666];
+    beacon.minor = [[NSNumber alloc] initWithInt:49567];
+    beacon.distance = [[NSNumber alloc] initWithFloat:2.15];
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [mutableArray addObject:beacon];
+    
+    ESTBeacon *beacon1 = [[ESTBeacon alloc] init];
+    beacon.proximityUUID = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+    beacon1.major = [[NSNumber alloc] initWithInt:55149];
+    beacon1.minor = [[NSNumber alloc] initWithInt:5016];
+    beacon1.distance = [[NSNumber alloc] initWithFloat:4.50];
+    [mutableArray addObject:beacon1];
+    
+    ESTBeacon *beacon2 = [[ESTBeacon alloc] init];
+    beacon.proximityUUID = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
+    beacon2.major = [[NSNumber alloc] initWithInt:24723];
+    beacon2.minor = [[NSNumber alloc] initWithInt:63838];
+    beacon2.distance = [[NSNumber alloc] initWithFloat:7.30];
+    [mutableArray addObject:beacon2];
+    
+    return mutableArray;
+}
+
+- (IBAction)DetectBeacons:(id)sender {
+    self.beacons = [[self dummyBeacons] mutableCopy];
+    
+    [self.tableView reloadData];
+    NSLog(@"%d", self.beacons.count);
 }
 
 - (void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region {
-//    ESTBeacon *beacon = [[ESTBeacon alloc] init];
-//    beacon.proximityUUID = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-//    beacon.major = [[NSNumber alloc] initWithInt:555];
-//    beacon.minor = [[NSNumber alloc] initWithInt:6789];
-//    beacon.distance = [[NSNumber alloc] initWithFloat:2.15];
-//    
-//    NSMutableArray *mutableArray = [NSMutableArray new];
-//    [mutableArray addObject:beacon];
-//    self.beacons = [mutableArray mutableCopy];
+    NSLog(@"---------- didRange");
+
+//    for (ESTBeacon *detectedbeacon in beacons) {
+//        if (![self.minors containsObject:detectedbeacon.minor.stringValue]) {
+//            [self.minors addObject:detectedbeacon.minor.stringValue];
+//            [self.beacons addObject:detectedbeacon];
+//            [self.tableView reloadData];
+//        }
+//    }
     
-    self.beacons = beacons;
-    [self.tableView reloadData];
+    
+    //self.beacons = beacons;
+    //[self.tableView reloadData];
     //NSLog(@"%d", beacons.count);
 }
 
@@ -93,16 +161,23 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //return 1;
     return [self.beacons count];
+    //return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //ESTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier" forIndexPath:indexPath];
+//    ESTTableViewCell *cell = (ESTTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"CellIdentifier" forIndexPath:indexPath];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
     ESTBeacon *beacon = [self.beacons objectAtIndex:indexPath.row];
     NSString *majorString = beacon.major.stringValue;
     NSString *minorString = beacon.minor.stringValue;
+    
+    
     
     NSString* beaconURL = [NSString stringWithFormat:@"http://yuweixia.local:8888/%@/%@", majorString, minorString];
     
@@ -126,11 +201,17 @@
 
     Room *room = [[Room alloc] initWithRoomDictionary:roomDetails];
     
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:100];
+    if ([available isEqualToString:@"available"]) {
+        imageView.image = [UIImage imageNamed:@"green_dot.png"];
+    } else {
+        imageView.image = [UIImage imageNamed:@"red_dot.png"];
+    }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", room.name];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", available];
+    UILabel *label = (UILabel *)[cell viewWithTag:101];
+    label.text = room.name;
+    label.font = [UIFont systemFontOfSize:36];
+    label.textColor = [UIColor whiteColor];
     
     if ([ibeacon.color isEqual: @"darkblue"]) {
         cell.backgroundColor = [UIColor colorWithRed:145.0/255.0 green:188.0/255.0 blue:161.0/255.0 alpha:1.0];
@@ -139,28 +220,18 @@
 
     } else if ([ibeacon.color isEqual:@"blue"]) {
         cell.backgroundColor = [UIColor colorWithRed:99.0/255.0 green:181.0/255.0 blue:218.0/255.0 alpha:1.0];
-
     }
-    
-//    cell.textLabel.text = [NSString stringWithFormat:@"Major: %@, Minor: %@", beacon.major, beacon.minor];
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"Distance: %.2f", [beacon.distance floatValue]];
     
     return cell;
 }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ESTBeacon *selectedBeacon = [self.beacons objectAtIndex:indexPath.row];
-//    
-//    
-//}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"ShowDetails"]) {
         NSLog(@"go to detail...");
-        DetailsTableViewController *detailTableViewController = [segue destinationViewController];
+        RoomDetailsViewController *roomDetailsViewController = [segue destinationViewController];
         
-        detailTableViewController.beacon = [self.beacons objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        roomDetailsViewController.beacon = [self.beacons objectAtIndex:[self.tableView indexPathForSelectedRow].row];
     }
 }
 

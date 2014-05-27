@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC156F3318EEE79D00042A61 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC156F3218EEE79D00042A61 /* BookViewController.m */; };
 		CC186C2118EAD58700A81BFD /* 11.json in Resources */ = {isa = PBXBuildFile; fileRef = CC186C2018EAD58700A81BFD /* 11.json */; };
+		CC21CB9B1933779800A4045E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC21CB9A1933779800A4045E /* QuartzCore.framework */; };
+		CC21CBA119337C8900A4045E /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = CC21CBA019337C8900A4045E /* UIView+Toast.m */; };
+		CC5894A7192D0872001B693F /* vetch.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5894A6192D0872001B693F /* vetch.png */; };
+		CC5894AA192DFAAC001B693F /* green_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5894A8192DFAAC001B693F /* green_dot.png */; };
+		CC5894AB192DFAAC001B693F /* red_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5894A9192DFAAC001B693F /* red_dot.png */; };
 		CCA6ED6818D9F93900E4C264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6ED6718D9F93900E4C264 /* Foundation.framework */; };
 		CCA6ED6A18D9F93900E4C264 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6ED6918D9F93900E4C264 /* CoreGraphics.framework */; };
 		CCA6ED6C18D9F93900E4C264 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6ED6B18D9F93900E4C264 /* UIKit.framework */; };
@@ -25,9 +31,10 @@
 		CCA6ED9D18D9FA0A00E4C264 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6ED9C18D9FA0A00E4C264 /* CoreLocation.framework */; };
 		CCA6EDA518DC818200E4C264 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6EDA418DC818200E4C264 /* SystemConfiguration.framework */; };
 		CCA6EDA718DC81A700E4C264 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6EDA618DC81A700E4C264 /* libEstimoteSDK.a */; };
-		CCA6EDAA18DCA75D00E4C264 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA6EDA918DCA75D00E4C264 /* DetailsTableViewController.m */; };
-		CCB37FD918F5505B005E743B /* Booking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB37FD818F5505B005E743B /* Booking.m */; };
+		CCB37FDC18F556AF005E743B /* RoomDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB37FDB18F556AF005E743B /* RoomDetailsViewController.m */; };
+		CCB37FDF18F56018005E743B /* EmbededTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB37FDE18F56018005E743B /* EmbededTableTableViewController.m */; };
 		CCDFB5E818E9BBC800397DA8 /* Room.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5E718E9BBC800397DA8 /* Room.m */; };
+		CCDFB5EB18E9C3C000397DA8 /* Booking.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5EA18E9C3C000397DA8 /* Booking.m */; };
 		CCDFB5EE18E9C50300397DA8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5ED18E9C50300397DA8 /* User.m */; };
 		CCDFB5F118E9C9CD00397DA8 /* Beacon.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDFB5F018E9C9CD00397DA8 /* Beacon.m */; };
 /* End PBXBuildFile section */
@@ -43,7 +50,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC156F3118EEE79D00042A61 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
+		CC156F3218EEE79D00042A61 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
 		CC186C2018EAD58700A81BFD /* 11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 11.json; sourceTree = "<group>"; };
+		CC21CB9A1933779800A4045E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CC21CB9F19337C8900A4045E /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		CC21CBA019337C8900A4045E /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		CC5894A6192D0872001B693F /* vetch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vetch.png; sourceTree = "<group>"; };
+		CC5894A8192DFAAC001B693F /* green_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_dot.png; sourceTree = "<group>"; };
+		CC5894A9192DFAAC001B693F /* red_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_dot.png; sourceTree = "<group>"; };
 		CCA6ED6418D9F93900E4C264 /* BeaconReceiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconReceiver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA6ED6718D9F93900E4C264 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CCA6ED6918D9F93900E4C264 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,12 +81,14 @@
 		CCA6ED9C18D9FA0A00E4C264 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CCA6EDA418DC818200E4C264 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CCA6EDA618DC81A700E4C264 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEstimoteSDK.a; path = EstimoteSDK/libEstimoteSDK.a; sourceTree = "<group>"; };
-		CCA6EDA818DCA75D00E4C264 /* DetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsTableViewController.h; sourceTree = "<group>"; };
-		CCA6EDA918DCA75D00E4C264 /* DetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewController.m; sourceTree = "<group>"; };
-		CCB37FD718F5505B005E743B /* Booking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Booking.h; sourceTree = "<group>"; };
-		CCB37FD818F5505B005E743B /* Booking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Booking.m; sourceTree = "<group>"; };
+		CCB37FDA18F556AF005E743B /* RoomDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomDetailsViewController.h; sourceTree = "<group>"; };
+		CCB37FDB18F556AF005E743B /* RoomDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomDetailsViewController.m; sourceTree = "<group>"; };
+		CCB37FDD18F56018005E743B /* EmbededTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmbededTableTableViewController.h; sourceTree = "<group>"; };
+		CCB37FDE18F56018005E743B /* EmbededTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmbededTableTableViewController.m; sourceTree = "<group>"; };
 		CCDFB5E618E9BBC800397DA8 /* Room.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Room.h; sourceTree = "<group>"; };
 		CCDFB5E718E9BBC800397DA8 /* Room.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Room.m; sourceTree = "<group>"; };
+		CCDFB5E918E9C3C000397DA8 /* Booking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Booking.h; path = ../Booking.h; sourceTree = "<group>"; };
+		CCDFB5EA18E9C3C000397DA8 /* Booking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Booking.m; path = ../Booking.m; sourceTree = "<group>"; };
 		CCDFB5EC18E9C50300397DA8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CCDFB5ED18E9C50300397DA8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CCDFB5EF18E9C9CD00397DA8 /* Beacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beacon.h; sourceTree = "<group>"; };
@@ -83,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC21CB9B1933779800A4045E /* QuartzCore.framework in Frameworks */,
 				CCA6EDA718DC81A700E4C264 /* libEstimoteSDK.a in Frameworks */,
 				CCA6EDA518DC818200E4C264 /* SystemConfiguration.framework in Frameworks */,
 				CCA6ED9D18D9FA0A00E4C264 /* CoreLocation.framework in Frameworks */,
@@ -127,6 +145,7 @@
 		CCA6ED6618D9F93900E4C264 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC21CB9A1933779800A4045E /* QuartzCore.framework */,
 				CCA6EDA618DC81A700E4C264 /* libEstimoteSDK.a */,
 				CCA6EDA418DC818200E4C264 /* SystemConfiguration.framework */,
 				CCA6ED9C18D9FA0A00E4C264 /* CoreLocation.framework */,
@@ -141,8 +160,10 @@
 		CCA6ED6D18D9F93900E4C264 /* BeaconReceiver */ = {
 			isa = PBXGroup;
 			children = (
-				CCB37FD718F5505B005E743B /* Booking.h */,
-				CCB37FD818F5505B005E743B /* Booking.m */,
+				CC21CB9F19337C8900A4045E /* UIView+Toast.h */,
+				CC21CBA019337C8900A4045E /* UIView+Toast.m */,
+				CCDFB5E918E9C3C000397DA8 /* Booking.h */,
+				CCDFB5EA18E9C3C000397DA8 /* Booking.m */,
 				CCA6ED7618D9F93900E4C264 /* AppDelegate.h */,
 				CCA6ED7718D9F93900E4C264 /* AppDelegate.m */,
 				CCA6ED7918D9F93900E4C264 /* Main.storyboard */,
@@ -150,8 +171,6 @@
 				CCA6ED7D18D9F93900E4C264 /* ViewController.m */,
 				CCA6ED7F18D9F93900E4C264 /* Images.xcassets */,
 				CCA6ED6E18D9F93900E4C264 /* Supporting Files */,
-				CCA6EDA818DCA75D00E4C264 /* DetailsTableViewController.h */,
-				CCA6EDA918DCA75D00E4C264 /* DetailsTableViewController.m */,
 				CCDFB5E618E9BBC800397DA8 /* Room.h */,
 				CCDFB5E718E9BBC800397DA8 /* Room.m */,
 				CCDFB5EC18E9C50300397DA8 /* User.h */,
@@ -159,6 +178,12 @@
 				CCDFB5EF18E9C9CD00397DA8 /* Beacon.h */,
 				CCDFB5F018E9C9CD00397DA8 /* Beacon.m */,
 				CC186C2018EAD58700A81BFD /* 11.json */,
+				CC156F3118EEE79D00042A61 /* BookViewController.h */,
+				CC156F3218EEE79D00042A61 /* BookViewController.m */,
+				CCB37FDA18F556AF005E743B /* RoomDetailsViewController.h */,
+				CCB37FDB18F556AF005E743B /* RoomDetailsViewController.m */,
+				CCB37FDD18F56018005E743B /* EmbededTableTableViewController.h */,
+				CCB37FDE18F56018005E743B /* EmbededTableTableViewController.m */,
 			);
 			path = BeaconReceiver;
 			sourceTree = "<group>";
@@ -166,6 +191,9 @@
 		CCA6ED6E18D9F93900E4C264 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CC5894A8192DFAAC001B693F /* green_dot.png */,
+				CC5894A9192DFAAC001B693F /* red_dot.png */,
+				CC5894A6192D0872001B693F /* vetch.png */,
 				CCA6ED6F18D9F93900E4C264 /* BeaconReceiver-Info.plist */,
 				CCA6ED7018D9F93900E4C264 /* InfoPlist.strings */,
 				CCA6ED7318D9F93900E4C264 /* main.m */,
@@ -273,6 +301,9 @@
 			files = (
 				CCA6ED8018D9F93900E4C264 /* Images.xcassets in Resources */,
 				CC186C2118EAD58700A81BFD /* 11.json in Resources */,
+				CC5894AB192DFAAC001B693F /* red_dot.png in Resources */,
+				CC5894A7192D0872001B693F /* vetch.png in Resources */,
+				CC5894AA192DFAAC001B693F /* green_dot.png in Resources */,
 				CCA6ED7218D9F93900E4C264 /* InfoPlist.strings in Resources */,
 				CCA6ED7B18D9F93900E4C264 /* Main.storyboard in Resources */,
 			);
@@ -293,12 +324,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB37FDC18F556AF005E743B /* RoomDetailsViewController.m in Sources */,
+				CC156F3318EEE79D00042A61 /* BookViewController.m in Sources */,
 				CCDFB5E818E9BBC800397DA8 /* Room.m in Sources */,
 				CCDFB5EE18E9C50300397DA8 /* User.m in Sources */,
-				CCA6EDAA18DCA75D00E4C264 /* DetailsTableViewController.m in Sources */,
+				CCB37FDF18F56018005E743B /* EmbededTableTableViewController.m in Sources */,
+				CC21CBA119337C8900A4045E /* UIView+Toast.m in Sources */,
 				CCDFB5F118E9C9CD00397DA8 /* Beacon.m in Sources */,
 				CCA6ED7E18D9F93900E4C264 /* ViewController.m in Sources */,
-				CCB37FD918F5505B005E743B /* Booking.m in Sources */,
+				CCDFB5EB18E9C3C000397DA8 /* Booking.m in Sources */,
 				CCA6ED7818D9F93900E4C264 /* AppDelegate.m in Sources */,
 				CCA6ED7418D9F93900E4C264 /* main.m in Sources */,
 			);
