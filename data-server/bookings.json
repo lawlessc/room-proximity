@@ -55,6 +55,14 @@
                     "EndT": "11:32",
                     "MeetingName": "testUser's Meeting",
                     "Users": "appUser"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "27/05/14",
+                    "StartT": "16:07",
+                    "EndT": "17:07",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
                 }
             ]
         },
@@ -76,6 +84,14 @@
                     "EndT": "13:30",
                     "MeetingName": "Lunch Meeting",
                     "Users": "Hank Hill"
+                },
+                {
+                    "URI": "/here/who/is/where",
+                    "date": "27/05/14",
+                    "StartT": "14:58",
+                    "EndT": "15:58",
+                    "MeetingName": "testUser's Meeting",
+                    "Users": "appUser"
                 }
             ]
         }

@@ -5,6 +5,7 @@ var fs = require ("fs"), json;
 var app = express();
 var url = require('url');
 var util = require ('util');
+var bodyParser = require('body-parser');
 
 // simple logger
 app.use(function(req, res, next){
@@ -13,10 +14,11 @@ app.use(function(req, res, next){
 });
 
 
-//for POSTS
-//app.use(express.json());
-//app.use(express.urlencoded());
-//app.use(express.methodOverride());
+// // for POSTS
+app.use(bodyParser());
+// app.use(express.json());
+// app.use(express.urlencoded());
+// app.use(express.methodOverride());
 
 
 var server = app.listen(8888, function() {
@@ -113,7 +115,7 @@ app.get('/beacon/new', function(req, res){
 //retrieves all beacons
 app.get('/beacon', function(req, res) {
   var beacons = getJson('beacons.json');
-  res.writeHead(200, {'Content-Type': 'text/html'});
+  // res.writeHead(200, {'Content-Type': 'text/html'});
   res.write(JSON.stringify(beacons));
   res.end();
 });
@@ -124,6 +126,7 @@ app.post('/rooms/:room/booking', function(req, res) {
   var room = req.params.room;
   // var room = 'solas';
   var uri = "/here/who/is/where";
+  console.log(req.body)
   var date = req.body.date;
   var startTime = req.body.startTime;
   var endTime = req.body.endTime;
@@ -212,12 +215,10 @@ app.get('/:major/:minor', function(req,res,next){
     var bookings = getBooking(myroom);
     var roomAvailability = getCurrentAvailability(bookings);
     var beaconInfo = getBeacon(major,minor)
-      res.json({beacon :beaconInfo , available: roomAvailability});
+    res.json({beacon :beaconInfo , available: roomAvailability});
       // res.json(beacons['beacons'][i]);
     }
   }
-  
-  next()
   
 });
 

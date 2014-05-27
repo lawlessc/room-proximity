@@ -37,6 +37,17 @@
         android:textOn="" 
         android:textOff=""
         android:text="" />
+    
+      <ToggleButton
+        android:id="@+id/TestMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/transparent"
+        android:textOn="" 
+        android:textOff=""
+        android:text="" />
 
     <TextView
         android:id="@+id/dummyModeInfo"

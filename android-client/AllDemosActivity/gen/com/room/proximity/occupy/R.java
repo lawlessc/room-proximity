@@ -36,30 +36,31 @@ public final class R {
         public static final int vetch=0x7f020005;
     }
     public static final class id {
-        public static final int Capacity=0x7f080013;
+        public static final int Capacity=0x7f080014;
         public static final int DummyMode=0x7f080002;
-        public static final int Location=0x7f080010;
-        public static final int Owner=0x7f080014;
-        public static final int Phone=0x7f080012;
-        public static final int Progress=0x7f080004;
-        public static final int Webcam=0x7f080015;
-        public static final int btnOccupyLater=0x7f080016;
-        public static final int btnOccupyNow=0x7f080017;
-        public static final int btnSave=0x7f08000b;
+        public static final int Location=0x7f080011;
+        public static final int Owner=0x7f080015;
+        public static final int Phone=0x7f080013;
+        public static final int Progress=0x7f080005;
+        public static final int TestMode=0x7f080003;
+        public static final int Webcam=0x7f080016;
+        public static final int btnOccupyLater=0x7f080017;
+        public static final int btnOccupyNow=0x7f080018;
+        public static final int btnSave=0x7f08000c;
         public static final int btnScan=0x7f080001;
         public static final int device_list=0x7f080000;
-        public static final int dummyModeInfo=0x7f080003;
-        public static final int edtDate=0x7f080006;
-        public static final int edtEndTime=0x7f080007;
-        public static final int edtMeetingName=0x7f08000e;
-        public static final int edtStartTime=0x7f080008;
-        public static final int progressBar=0x7f080005;
-        public static final int roomName=0x7f080011;
-        public static final int txtDate=0x7f08000d;
-        public static final int txtDetails=0x7f08000f;
-        public static final int txtEndT=0x7f08000c;
-        public static final int txtMeetingName=0x7f080009;
-        public static final int txtStartT=0x7f08000a;
+        public static final int dummyModeInfo=0x7f080004;
+        public static final int edtDate=0x7f080007;
+        public static final int edtEndTime=0x7f080008;
+        public static final int edtMeetingName=0x7f08000f;
+        public static final int edtStartTime=0x7f080009;
+        public static final int progressBar=0x7f080006;
+        public static final int roomName=0x7f080012;
+        public static final int txtDate=0x7f08000e;
+        public static final int txtDetails=0x7f080010;
+        public static final int txtEndT=0x7f08000d;
+        public static final int txtMeetingName=0x7f08000a;
+        public static final int txtStartT=0x7f08000b;
     }
     public static final class layout {
         public static final int device_item=0x7f030000;

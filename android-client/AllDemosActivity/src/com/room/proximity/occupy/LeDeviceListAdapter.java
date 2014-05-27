@@ -38,6 +38,7 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
     int major = -1;
     int minor = -1;
+    String name = null;
 
 
     public LeDeviceListAdapter(Context context) {
@@ -78,19 +79,28 @@ public class LeDeviceListAdapter extends BaseAdapter {
 
         major = beacon.getMajor();
         minor = beacon.getMinor();
+        name = beacon.getName();
 
         String colour = null; 
         String room = null;
         String availability= null;
 
+        
+        
         if(major == 111){
-            
-            holder.roomNameView.setText("Dummy Room"); 
+            holder.roomNameView.setText(name); 
             holder.roomNameView.setTextColor(Color.WHITE);
-            view.setBackgroundColor(Color.rgb(91,192,222));
-            holder.availabilityImage.setImageResource(R.drawable.green_dot);
-            
-            
+            if (name == "Jupiter"){
+                view.setBackgroundColor(Color.rgb(91,192,222));
+                holder.availabilityImage.setImageResource(R.drawable.green_dot);      
+            }else if(name == "Saturn"){
+                view.setBackgroundColor(Color.rgb(169,219,169));
+                holder.availabilityImage.setImageResource(R.drawable.green_dot);      
+            }else{
+                view.setBackgroundColor(Color.rgb(45,37,86));
+                holder.availabilityImage.setImageResource(R.drawable.red_dot);    
+            }
+
         }else if (major != 111){
             
             try {
