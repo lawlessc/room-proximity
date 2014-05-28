@@ -281,16 +281,3 @@ function getBeacon(major, minor){
   } 
   return strBeacon;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
