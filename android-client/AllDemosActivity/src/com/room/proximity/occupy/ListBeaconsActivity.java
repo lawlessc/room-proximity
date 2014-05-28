@@ -47,7 +47,13 @@ public class ListBeaconsActivity extends Activity {
     private LeDeviceListAdapter adapter;
     private int scanningTime =0;
 
-    Beacon myBeacon = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "test_beacon", "FE:85:EE:7F:E7:6B", 111, 49567, 5, 45);
+    Beacon jupiter_test = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "Jupiter", "FE:85:EE:7F:E7:6B", 111, 49567, 5, 45);
+    Beacon saturn_test = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "Saturn", "FE:85:EE:7F:E7:6B", 111, 49567, 5, 45);
+    Beacon neptune_test = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "Neptune", "FE:85:EE:7F:E7:6B", 111, 49567, 5, 45);
+    
+    Beacon jupiter = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "test_beacon", "FE:85:EE:7F:E7:6B", 666, 49567, 5, 45);
+    Beacon saturn = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "test_beacon", "FE:85:EE:7F:E7:6B", 55149, 5016, 5, 45);
+    Beacon neptune = new Beacon("B9407F30-F5F8-466E-AFF9-25556B57FE6D", "test_beacon", "FE:85:EE:7F:E7:6B", 24723, 63838, 5, 45);
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +93,12 @@ public class ListBeaconsActivity extends Activity {
             }
         }); 
 
-        final ToggleButton toggle = (ToggleButton) findViewById(R.id.DummyMode);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        final ToggleButton toggleDummy = (ToggleButton) findViewById(R.id.DummyMode);
+        toggleDummy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     // The toggle is enabled
-                    toggle.setBackgroundColor(color.red);
+                    toggleDummy.setBackgroundColor(color.red);
                     dummyBeacon();
                     pb.setVisibility(View.GONE);
                     dummyInfo.setVisibility(View.VISIBLE);
@@ -108,7 +114,7 @@ public class ListBeaconsActivity extends Activity {
                     
                 } else {
                     // The toggle is disabled
-                    toggle.setBackgroundDrawable(null);
+                    toggleDummy.setBackgroundDrawable(null);
                     dummyInfo.setVisibility(View.GONE);
                     btnScan.setEnabled(true);
                     adapter.replaceWith(Collections.<Beacon>emptyList());
@@ -117,16 +123,55 @@ public class ListBeaconsActivity extends Activity {
             }
         });
 
+        final ToggleButton toggleTest = (ToggleButton) findViewById(R.id.TestMode);
+        toggleTest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    toggleTest.setBackgroundColor(color.red);
+                    testBeacon();
+                    pb.setVisibility(View.GONE);
+                    dummyInfo.setVisibility(View.VISIBLE);
+                    btnScan.setEnabled(false);
+                    try {
+                        beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_REGION);
+                        beaconManager.stopMonitoring(ALL_ESTIMOTE_BEACONS_REGION);  
+                    } catch (RemoteException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
+                    
+                } else {
+                    // The toggle is disabled
+                    toggleTest.setBackgroundDrawable(null);
+                    dummyInfo.setVisibility(View.GONE);
+                    btnScan.setEnabled(true);
+                    adapter.replaceWith(Collections.<Beacon>emptyList());
+//                    scan(null);
+                }
+            }
+        });
         
         //scan the first time the app is opened
         scan(null);
     }
     
     public void dummyBeacon(){ 
-        List<Beacon> dummyBeacon = new ArrayList<Beacon>(1);
-        dummyBeacon.add(myBeacon);
+        List<Beacon> dummyBeacon = new ArrayList<Beacon>(2);
+        dummyBeacon.add(jupiter);
+        dummyBeacon.add(saturn);
+        dummyBeacon.add(neptune);
         adapter.replaceWith(dummyBeacon);     
     }  
+    
+    public void testBeacon(){
+        List<Beacon> dummyBeacon = new ArrayList<Beacon>(2);
+        dummyBeacon.add(jupiter_test);
+        dummyBeacon.add(saturn_test);
+        dummyBeacon.add(neptune_test);
+        adapter.replaceWith(dummyBeacon);     
+    }
         
     public void scan(View view){   
         final LinearLayout pb = (LinearLayout)findViewById(R.id.Progress);
@@ -237,7 +282,7 @@ public class ListBeaconsActivity extends Activity {
     @Override
     protected void onPause(){
         super.onPause();
-        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
+//        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
     }
 
     @Override

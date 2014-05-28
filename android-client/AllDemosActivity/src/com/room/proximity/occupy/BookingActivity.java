@@ -54,7 +54,38 @@ public class BookingActivity extends Activity{
         major = beacon.getMajor();
         minor = beacon.getMinor();
         
-        if (major !=111 ){
+        
+        if(major==111){
+            TextView name = new TextView(getApplicationContext());
+            TextView location = new TextView(getApplicationContext());
+            TextView capacity = new TextView(getApplicationContext());
+            TextView phone = new TextView(getApplicationContext());
+            TextView owner = new TextView(getApplicationContext());
+            TextView conferencing = new TextView(getApplicationContext());
+
+            name = (TextView)findViewById(R.id.roomName);        
+            location = (TextView)findViewById(R.id.Location);
+            capacity = (TextView)findViewById(R.id.Capacity);
+            phone = (TextView)findViewById(R.id.Phone);  
+            owner = (TextView)findViewById(R.id.Owner);          
+            conferencing = (TextView)findViewById(R.id.Webcam);
+
+            name.setText(beacon.getName());
+            location.setText("1st Floor");
+            capacity.setText("Fits 20");
+            phone.setText("Phone: 01652878");
+            owner.setText("Owned by Olympus ");
+            conferencing.setText("Webcam: true");
+            Log.e("test",name.getText().toString());
+            if(beacon.getName().equalsIgnoreCase("Neptune")){
+                View btnOccpied = findViewById(R.id.btnOccupyNow);
+                Button btnOccLtr = (Button) findViewById(R.id.btnOccupyLater);
+                btnOccpied.setVisibility(View.GONE);
+                btnOccLtr.setTextSize(40);
+            }
+            
+        }       
+        else if (major !=111 ){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
