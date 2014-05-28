@@ -14,15 +14,10 @@ app.use(function(req, res, next){
 });
 
 
-// // for POSTS
+// for POSTS
 app.use(bodyParser());
-// app.use(express.json());
-// app.use(express.urlencoded());
-// app.use(express.methodOverride());
-
 
 var server = app.listen(8888, function() {
-    //app.writeHead(200, {'Content-Type': 'text/plain'}); 
     console.log('Listening on port %d', server.address().port);
 });
 
@@ -46,7 +41,7 @@ app.param('major', /^\d+$/);
 app.param('minor', /^\d+$/);
 
 
-app.get('/:major/:minor/redirect', function(req,res,next){
+app.get('/:major/:minor/redirect', function(req,res){
   var major = req.params.major;
   var minor = req.params.minor;
   var beacons = getJson('beacons.json');
@@ -61,7 +56,7 @@ app.get('/:major/:minor/redirect', function(req,res,next){
     }
   }
   
-  next()
+  // next()
   
 });
 
@@ -82,10 +77,10 @@ app.post ("/beacons/new", function (req, res) {
   //add object to array
   var pos = jBeacons['beacons'].length;
   jBeacons['beacons'][pos]= jObject;
-  var strBeacons = JSON.stringify(jBeacons, null, 4);
+  var strBeacon = JSON.stringify(jBeacons, null, 4);
     
   //write to .json file
-    fs.writeFile("beacons.json", strBeacons, function(err) {
+    fs.writeFile("beacons.json", strBeacon, function(err) {
         if(err) {
             console.log(err);
         } else {
@@ -145,12 +140,12 @@ app.post('/rooms/:room/booking', function(req, res) {
       var pos = newBooking['bookings'].length;
       newBooking['bookings'][pos]= jObject;
       //converts the new booking to a string for saving
-      var strBookings = JSON.stringify(jBookings, null, 4);
+      var strBooking = JSON.stringify(jBookings, null, 4);
       }
   }
 
   //write to .json file
-    fs.writeFile("bookings.json", strBookings, function(err) {
+    fs.writeFile("bookings.json", strBooking, function(err) {
         if(err) {
             console.log(err);
 			res.send({ result: 'failed'});
@@ -164,15 +159,15 @@ app.post('/rooms/:room/booking', function(req, res) {
 app.get('/rooms/:room/booking/:date', function(req, res){
 	var room = req.params.room;
 	var date = req.params.date;
-	
+  
   var jBookings = getJson('bookings.json');
 	var strBookings;
+  
     for (var i = 0; i< jBookings['rooms'].length; i++) {
         if (room == jBookings['rooms'][i].roomname){
           strBookings = jBookings['rooms'][i];
         }
     }
-	
 	var bookingsOfTheDate = [];
 	for (var i = 0; i < strBookings['bookings'].length; i ++) {
 		if (date == strBookings['bookings'][i].date) {
@@ -201,38 +196,31 @@ app.get('/rooms/:room/booking', function(req, res){
 
 });
 
-app.get('/:major/:minor', function(req,res,next){
+app.get('/:major/:minor', function(req,res){
   var major = req.params.major;
   var minor = req.params.minor;
-  var beacons = getJson('beacons.json');
- 
+  var storedBeacons = getJson('beacons.json');
  
  //checks if major and minor are part of the url + redirects
-  for(var i=0; i<beacons['beacons'].length; i++){
-    if (major == beacons['beacons'][i].major && minor == beacons['beacons'][i].minor){
-    
-    var myroom = beacons['beacons'][i].room;
-    var bookings = getBooking(myroom);
-    var roomAvailability = getCurrentAvailability(bookings);
-    var beaconInfo = getBeacon(major,minor)
-    res.json({beacon :beaconInfo , available: roomAvailability});
-      // res.json(beacons['beacons'][i]);
+  for(var i=0; i<storedBeacons['beacons'].length; i++){
+    if (major == storedBeacons['beacons'][i].major && minor == storedBeacons['beacons'][i].minor){
+      var myroom = storedBeacons['beacons'][i].room;
+      var bookings = getBooking(myroom);
+      var roomAvailability = getCurrentAvailability(bookings);
+      var beaconInfo = getBeacon(major,minor)
+      res.json({beacon :beaconInfo , available: roomAvailability});
     }
   }
   
 });
 
-
 //used for storing room information before db is set up
 app.get('/rooms/:room', function(req,res){
-  //var myroom = url.parse(req.url).pathname.split('/')[2];
   var myroom = req.params.room;
   var bookings = getBooking(myroom);
   var roomDetails = getRoomDetails(myroom);
   var roomAvailability = getCurrentAvailability(bookings);
-  //res.send(roomDetails + bookings);
   res.json({roomDetails: roomDetails, bookings: bookings, available: roomAvailability});
-    
 });
 
 //Parses .json file

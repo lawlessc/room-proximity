@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE manifest>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.room.proximity.occupy"
+          android:versionCode="1"
+          android:versionName="1.0">
+
+  <uses-sdk
+      android:minSdkVersion="18"
+      android:targetSdkVersion="19"/>
+
+  <!-- Needed permissions in order to scan for beacons. -->
+  <uses-permission android:name="android.permission.BLUETOOTH"/>
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+  
+  <!-- Needed permissions in order to connect to back-end server. -->
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
+  <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+  
+  <!-- App icon is Meeting by Julieta Felix on The Noun Project -->
+  <application
+      android:label="Occupy"
+      android:theme="@style/AppTheme"
+      android:icon="@drawable/occupy_logo"
+      android:logo="@drawable/occupy_logo"
+      android:allowBackup="true">
+      
+<!--       <style name="Theme.Holo.Light" parent="@android:style/TextAppearance">
+          <item name="android:textColor">#FF530D</item>
+          
+      </style> -->
+ 
+    <activity
+        android:name="com.room.proximity.occupy.ListBeaconsActivity"
+        android:label="Occupy"
+        android:screenOrientation="portrait"
+        android:launchMode="singleTop">
+       <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>   
+      
+    <activity
+        android:name="com.room.proximity.occupy.OccupyNowActivity"
+        android:label="Occupy"
+        android:screenOrientation="portrait"
+        android:launchMode="singleTop"/>
+    
+    <activity
+            android:name="com.room.proximity.occupy.OccupyLaterActivity"
+            android:label="Occupy"
+            android:screenOrientation="portrait" 
+            android:launchMode="singleTop"/>
+
+    <!-- Estimote service responsible for scanning beacons. -->
+    <service android:name="com.estimote.sdk.service.BeaconService"
+             android:exported="false"/>
+  </application>
+
+</manifest>
